@@ -4,14 +4,12 @@
             [re-frame.core :as rf]
             [andromeda.state.routes]))
 
-
-
 (rf/reg-event-db
   :init-db
   (fn [_ _]
-    (let [schema {}
-          db (d/empty-db schema)]
-      (d/db-with db [{:db/id -1
+    (let [schema {}]
+      (d/db-with (d/empty-db schema) 
+                 [{:db/id -1
                    :app/title "Besides Programming"
                    :app/site :home}]))))
 
@@ -19,8 +17,8 @@
   :app/site
   (fn app-site-sub [db _]
     (let [site (d/q '[:find ?site .
-                       :where [_ :app/site ?site]]
-                      @db)]
+                      :where [_ :app/site ?site]]
+                    @db)]
       (reaction site))))
 
 (rf/dispatch-sync [:init-db])
