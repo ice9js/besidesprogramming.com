@@ -1,0 +1,3 @@
+{:require  [andromeda.app]
+ :init-fns [andromeda.app/init]
+ :compiler-options {:asset-path "js/app.out"}}
