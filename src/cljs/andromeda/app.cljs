@@ -1,18 +1,15 @@
 (ns andromeda.app
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as reagent :refer [atom]]
+            [re-frame.core :as rf]
+            [andromeda.state.core]))
 
-(defn some-component []
-  [:div
-   [:h3 "I am a component!"]
-   [:p.someclass
-    "I have " [:strong "bold"]
-    [:span {:style {:color "red"}} " and red"]
-    " text."]])
+(defmulti sites identity)
+(defmethod sites :home [] [:div "Hello world"])
 
-(defn calling-component []
-  [:div "Parent component"
-   [some-component]])
+(defn app []
+  (let [site (rf/subscribe [:app/site])]
+    (sites @site)))
 
 (defn init []
-  (reagent/render-component [calling-component]
-                            (.getElementById js/document "container")))
+  (reagent/render-component [app]
+                            (.getElementById js/document "app")))
