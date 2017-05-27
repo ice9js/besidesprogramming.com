@@ -1,5 +1,5 @@
 (set-env!
- :source-paths    #{"src/cljs" "src/clj"}
+ :source-paths    #{"src/cljs" "src/clj" "less"}
  :resource-paths  #{"resources"}
  :dependencies '[[adzerk/boot-cljs        "1.7.228-2" :scope "test"]
                  [adzerk/boot-cljs-repl   "0.3.3"     :scope "test"]
@@ -28,7 +28,8 @@
         (cljs)
 
         (less)
-        (sift :move {#"screen.css" "css/screen.css" #"screen.main.css.map" "css/screen.main.css.map"})))
+        (sift :move {#"screen.css" "css/screen.css"
+                     #"screen.main.css.map" "css/screen.main.css.map"})))
 
 (deftask run []
   (comp (serve)
