@@ -1,6 +1,10 @@
 (ns andromeda.components
-  (:require [reagent.core :as reagent]
+  (:require [reagent.core :as reagent :refer [atom]]
             [andromeda.config :as config]))
+
+(defn fa [icon]
+  "Font awesome icons."
+  [:i.fa {:class (str "fa-" icon)}])
 
 (defn logo
   "Big site logo."
@@ -36,6 +40,20 @@
     (map-indexed (fn [idx elem] (with-meta elem {:key idx}))
                  children)])
 
+(defn search-input
+  "A search input component."
+  ([] (search-input ""))
+  ([initial-value]
+    (let [query (atom initial-value)]
+      (fn []
+        [:div.search-input
+          [:input.search-input__input
+            {:value @query
+             :on-change #(reset! query (-> % .-target .-value))}]
+          [:a.search-input__button
+            {:href (str "/search?q=" (js/encodeURIComponent @query))}
+            [fa "search"]]]))))
+
 (defn sidebar
   "Content sidebar."
   [& children]
@@ -43,9 +61,17 @@
     (map-indexed (fn [idx elem] (with-meta elem {:key idx}))
                  children)])
 
-(defn fa [icon]
-  "Font awesome icons."
-  [:i.fa {:class (str "fa-" icon)}])
+(defn sidebar-image
+  "An image component to be used within the sidebar."
+  [src description]
+  [:div.sidebar-image
+    [:img.sidebar-image__img {:src src
+                              :alt description}]])
+
+(defn sidebar-text
+  "A text box component to be used within the sidebar."
+  []
+  [:div])
 
 (defn social-button
   "Social media links."
