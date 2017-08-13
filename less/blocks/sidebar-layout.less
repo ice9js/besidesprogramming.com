@@ -1,0 +1,21 @@
+.sidebar-layout {
+  display: flex;
+  flex-direction: column;
+
+  @media @desktop {
+    flex-direction: row;
+  }
+}
+
+.sidebar-layout__content {
+  @media @desktop {
+    flex: 1;
+  }
+}
+
+.sidebar-layout__social-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}

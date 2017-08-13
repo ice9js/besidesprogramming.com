@@ -1,4 +1,4 @@
-(ns andromeda.state.routes
+(ns andromeda.routes
   (:require-macros [secretary.core :refer [defroute]])
   (:import goog.history.Html5History
            goog.Uri)
