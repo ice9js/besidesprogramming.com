@@ -8,11 +8,11 @@
             [re-frame.core :as rf]))
 
 (defn get-href [element]
-  (if (= "app" (.-id element))
-    ""
-    (or (.-href element) (get-href (.-parentNode element)))))
-
-(defn get-uri [link]
+  (if element
+      (or (.-href element) (get-href (.-parentNode element)))
+      ""))
+    
+  (defn get-uri [link]
   (.getPath (.parse Uri link)))
 
 (defn hook-browser-navigation! []
