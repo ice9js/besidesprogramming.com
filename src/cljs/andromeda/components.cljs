@@ -1,6 +1,7 @@
 (ns andromeda.components
   (:require [reagent.core :as reagent :refer [atom]]
-            [andromeda.config :as config]))
+            [andromeda.config :as config]
+            [andromeda.utils :refer [className]]))
 
 (defn fa [icon]
   "Font awesome icons."
@@ -75,14 +76,34 @@
 
 (defn social-button
   "Social media links."
-  [icon link]
+  [icon url]
   [:a.social-button
-    {:href link
+    {:href url
      :rel "noopener"
      :target "_blank"}
     [fa icon]])
 
-(defn title-header
+(defn share-button
+  "Share buttons for social media."
+  ([icon url] (share-button icon url false))
+  ([icon url is-small]
+    [:a.share-button
+      {:class (className {"is-small" is-small
+                          icon true})
+       :href url}
+      [fa icon]]))
+
+(defn page-title
   "Page title header."
   [text]
-  [:h2.title-header text])
+  [:h2.page-title text])
+
+(defn post-header
+  "Post header including social links & comment count."
+  [post]
+  [:div.post-header
+    [page-title "Nanana nanana nanana batman!"]
+    [:div.post-header__meta
+      (share-button "facebook" "#")
+      (share-button "twitter" "#")
+      (share-button "pinterest" "#")]])
