@@ -1,5 +1,9 @@
 (ns andromeda.config)
 
+(def domain "besidesprogramming.com")
+
+(def api-host "http://zoninator.dev/wp-json")
+
 (def nav-links [{:label "Home" :url "/"}
                 {:label "Articles" :url "/all"}
                 {:label "About" :url "/about"}])
@@ -9,3 +13,7 @@
                    {:link "#" :icon "instagram"}
                    {:link "#" :icon "twitter"}
                    {:link "#" :icon "facebook"}])
+
+(def posts-per-page 10)
+
+(def posts-on-home-page 5)
