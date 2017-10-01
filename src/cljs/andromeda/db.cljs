@@ -1,15 +1,11 @@
 (ns andromeda.db
-  (:require [datascript.core :as d]
-            [re-frame.core :as rf]))
-
-(def schema {})
+  (:require [re-frame.core :as rf]))
 
 (rf/reg-event-db
   :init-db
   (fn [_ _]
-    (d/db-with (d/empty-db schema)
-               [{:db/id -1
-                 :app/title "Besides Programming"
-                 :app/view :home}])))
+    {:app {:title "Besides Programming"
+           :view :home
+           :uri []}}))
 
 (rf/dispatch-sync [:init-db])
