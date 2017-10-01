@@ -1,29 +1,46 @@
 .share-button {
-	color: @background-grey;
+  border-radius: 4px;
+  color: @background-grey;
+  flex: 1;
+  font-size: 16px;
+  height: 35px;
+  line-height: 35px;
+  margin: 0 7px;
+  text-align: center;
+  text-transform: capitalize;
 
-	&.is-small {
-		border-radius: 3px;
-		font-size: 14px;
-		height: 22px;
-		line-height: 22px;
-		margin: 0 5px;
-		text-align: center;
-		width: 40px;
-	}
+  &.is-small {
+    border-radius: 3px;
+    flex: initial;
+    font-size: 14px;
+    height: 22px;
+    line-height: 22px;
+    margin: 0 4px;
+    width: 40px;
+  }
 
-	&:first-child, &:last-child {
-		margin: 0;
-	}
+  &:first-child {
+    margin-left: 0;
+  }
 
-	&.facebook {
-		background-color: @facebook;
-	}
+  &:last-child {
+    margin-right: 0;
+  }
 
-	&.twitter {
-		background-color: @twitter;
-	}
+  &.facebook {
+    background-color: @facebook;
+  }
 
-	&.pinterest {
-		background-color: @pinterest;
-	}
+  &.twitter {
+    background-color: @twitter;
+  }
+
+  &.pinterest {
+    background-color: @pinterest;
+  }
+}
+
+.share-button__action {
+  margin-left: 7px;
+  font-size: 14px;
 }
