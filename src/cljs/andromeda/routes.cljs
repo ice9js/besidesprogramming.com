@@ -48,9 +48,11 @@
     (. history (setToken path title))))
 
 (defn app-routes []
-  (defroute "/" [] (.log js/console "routing..."))
-  ; (defroute "/" [] (rf/dispatch [:load-page "home"]))
-  ; (defroute "/:page" [page] (rf/dispatch [:load-page page]))
+  (defroute "/all" [] (rf/dispatch [:load-articles 1]))
+  (defroute "/all/:page" [page] (rf/dispatch [:load-articles page]))
+  (defroute "/search" [] (rf/dispatch [:load-search]))
+  (defroute "/:post" [post] (rf/dispatch [:load-post post]))
+  (defroute "/" [] (rf/dispatch [:load-home-page]))
 
   (hook-browser-navigation!))
 

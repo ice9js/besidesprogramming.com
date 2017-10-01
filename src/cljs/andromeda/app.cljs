@@ -9,10 +9,14 @@
 
 (defmulti sites identity)
 (defmethod sites :home [] (views/home))
+(defmethod sites :articles [] (views/articles))
+(defmethod sites :search [] (views/search))
+(defmethod sites :post [] (views/post))
 
 (defn app []
-  (let [site (rf/subscribe [:app/site])]
-    (sites @site)))
+  (let [site (rf/subscribe [:app/view])]
+    (fn []
+      (sites @site))))
 
 (defn init []
   (reagent/render-component [app]
