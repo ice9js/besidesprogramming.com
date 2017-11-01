@@ -214,3 +214,19 @@
             [post-action-button [:span [fa "comment"] "Join discussion"]
                                 (str "/" (:slug post) "#disqus_thread")]
             [post-action-button "Read more…" (str "/" (:slug post))])]])))
+
+(defn timeline
+  "Timeline component."
+  [year events]
+  [:div.timeline
+    [:h3.timeline__year year]
+    [:ul.timeline__events
+      (map-indexed (fn [idx event]
+                     (with-meta
+                       [:li.timeline__event
+                         [:a
+                           {:href (:url event)}
+                           [:span.timeline__date (date (:date event))]
+                           [:h2.timeline__event-title (:title event)]]]
+                       {:key idx}))
+                   events)]])
