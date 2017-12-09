@@ -24,7 +24,10 @@
     [components/logo]
     [components/sidebar-layout
       [components/main
-        [blocks/posts-feed config/posts-per-page false]]]])
+        [components/page-title "Articles"]
+        [blocks/posts-timeline]
+        ; [blocks/posts-feed config/posts-per-page false]
+        ]]])
 
 (defn search
   "Search results list."

@@ -30,6 +30,7 @@
               path (get-uri link)
               title (.-title (.-target e))]
           (when (and
+                ; fix that to use current window location :p
                 (re-matches #"^https?://(www\.)?(localhost:?|besidesprogramming\.).*" (str "" link))
                 (secretary/locate-route path))
             (. e stopPropagation)
@@ -48,8 +49,7 @@
     (. history (setToken path title))))
 
 (defn app-routes []
-  (defroute "/all" [] (rf/dispatch [:load-articles 1]))
-  (defroute "/all/:page" [page] (rf/dispatch [:load-articles page]))
+  (defroute "/all" [] (rf/dispatch [:load-articles nil]))
   (defroute "/search" [] (rf/dispatch [:load-search]))
   (defroute "/:post" [post] (rf/dispatch [:load-post post]))
   (defroute "/" [] (rf/dispatch [:load-home-page]))
