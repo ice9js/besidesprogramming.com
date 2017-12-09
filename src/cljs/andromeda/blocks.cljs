@@ -22,21 +22,28 @@
   [per-page show-first]
   (let [uri (rf/subscribe [:app/uri])
         page (or (first @uri) 1)
-        posts (rf/subscribe [:latest-posts per-page page])]
+        posts (rf/subscribe [:posts])
+        loading (rf/subscribe [:posts-loading])
+        total-posts (rf/subscribe [:posts-total])]
     (fn [per-page show-first]
       (let [latest-post (if show-first (first @posts) nil)]
         [:div.posts-feed
           (map #(with-meta [components/post-excerpt % (= % latest-post)] {:key (:slug %)})
-               @posts)]))))
+               @posts)
+          (when (and (< (count @posts) @total-posts) (not @loading))
+                [components/infinite-loader #(rf/dispatch [:fetch-posts per-page (count @posts)])])]))))
 
 (defn posts-timeline
   "Post archives timeline."
   []
-  (let [year #(.getFullYear (js/Date. (:date %)))
-        posts (rf/subscribe [:latest-posts 999 1])
-        posts-by-year (group-by year @posts)]
+  (let [posts-by-year (rf/subscribe [:posts-by-year])
+        loading (rf/subscribe [:posts-loading])
+        posts-count (rf/subscribe [:posts-count])
+        total-posts (rf/subscribe [:posts-total])]
     (fn []
       [:div.posts-timeline
         (map (fn [[year posts]]
                (with-meta [components/timeline year posts] {:key year}))
-             posts-by-year)])))
+             @posts-by-year)
+        (when (and (< @posts-count @total-posts) (not @loading))
+              [components/infinite-loader #(rf/dispatch [:fetch-posts config/posts-per-page @posts-count])])])))

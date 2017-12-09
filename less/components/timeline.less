@@ -1,0 +1,62 @@
+.timeline__year {
+  color: @medium-grey;
+  font-family: @montserrat;
+  font-size: 60px;
+  font-weight: bold;
+  position: relative;
+}
+
+.timeline__events {
+  padding: 20px 0 20px 80px;
+  position: relative;
+
+  &::before {
+    background-color: @medium-grey;
+    border-radius: 3px;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 55px;
+    position: absolute;
+    top: 0;
+    width: 6px;
+  }
+}
+
+.timeline__event {
+  list-style-type: none;
+  margin-bottom: 18px;
+  position: relative;
+
+  &::before {
+    background-color: @medium-grey;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 16px;
+    left: -30px;
+    position: absolute;
+    top: 1px;
+    width: 16px;
+  }
+}
+
+.timeline__date {
+  color: @medium-grey;
+  display: block;
+  font-family: @montserrat;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+  margin: 0 0 -5px;
+  text-transform: uppercase;
+}
+
+.timeline__event-title {
+  color: @text-headers;
+  font-family: @montserrat;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0 auto;
+  width: 100%;
+}

@@ -13,7 +13,8 @@
     [components/logo]
     [components/sidebar-layout
       [components/main
-        [blocks/posts-feed config/posts-on-home-page true]]]])
+        [blocks/posts-feed config/posts-on-home-page true]
+        ]]])
 
 (defn articles
   "Complete articles list."

@@ -15,8 +15,8 @@
 
 (defn posts-by-date
   "Returns posts sorted by date."
-  ([db] (let [items (reaction (vals (get-in @db [:posts :items] {})))]
-          (reaction (sort-by :date #(compare %2 %1) (map :item @items)))))
+  ([db] (let [items (reaction (get-in @db [:posts :items] {}))]
+          (reaction (sort-by :date #(compare %2 %1) (map :item (vals @items))))))
   ([db _] (posts-by-date db)))
 
 (rf/reg-sub-raw
@@ -29,6 +29,12 @@
     (let [sorted-posts (posts-by-date db)]
       (reaction (group-by #(.getFullYear (js/Date. (:date %)))
                           @sorted-posts)))))
+
+(rf/reg-sub-raw
+  :posts-count
+  (fn [db _]
+    (let [posts (reaction (get-in @db [:posts :items] {}))]
+      (reaction (count (vals @posts))))))
 
 (rf/reg-sub-raw
   :posts-total
