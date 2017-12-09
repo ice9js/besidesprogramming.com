@@ -13,16 +13,39 @@
   (fn [db _]
     (reaction (:uri (:app @db)))))
 
+(defn posts-by-date
+  "Returns posts sorted by date."
+  ([db] (let [items (reaction (vals (get-in @db [:posts :items] {})))]
+          (reaction (sort-by :date #(compare %2 %1) (map :item @items)))))
+  ([db _] (posts-by-date db)))
+
 (rf/reg-sub-raw
-  :latest-posts
-  (fn [db [_ per-page page]]
-    (let [posts (reaction (vals (:posts @db)))
-          sorted-posts (reaction (sort-by :date #(compare %2 %1) @posts))]
-      (reaction (->> @sorted-posts
-                     (take (* page per-page))
-                     (take-last per-page))))))
+  :posts
+  posts-by-date)
+
+(rf/reg-sub-raw
+  :posts-by-year
+  (fn [db _]
+    (let [sorted-posts (posts-by-date db)]
+      (reaction (group-by #(.getFullYear (js/Date. (:date %)))
+                          @sorted-posts)))))
+
+(rf/reg-sub-raw
+  :posts-total
+  (fn [db _]
+    (reaction (get-in @db [:posts :total] 0))))
+
+(rf/reg-sub-raw
+  :posts-loading
+  (fn [db _]
+    (reaction (get-in @db [:posts :loading] false))))
 
 (rf/reg-sub-raw
   :post
   (fn [db [_ slug]]
-    (reaction ((:posts @db) slug))))
+    (reaction (get-in @db [:posts :items slug :item]))))
+
+(rf/reg-sub-raw
+  :post-loading
+  (fn [db [_ slug]]
+    (reaction (get-in @db [:posts :items slug :loading]))))
