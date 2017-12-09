@@ -215,6 +215,24 @@
                                 (str "/" (:slug post) "#disqus_thread")]
             [post-action-button "Read more…" (str "/" (:slug post))])]])))
 
+(defn infinite-loader
+  "Triggers the given callback when scrolled into view."
+  [on-enter]
+  (let [loader (atom nil)
+        on-scroll #(when (<= (.-offsetTop @loader) (+ (.-scrollY js/window)
+                                                    (.-innerHeight js/window)))
+                         (on-enter))]
+    (fn []
+      (reagent/create-class
+        {:component-did-mount #(.addEventListener js/window "scroll" on-scroll)
+
+         :component-will-unmount #(.removeEventListener js/window "scroll" on-scroll)
+
+         :display-name "infinite-loader"
+
+         :render (fn [on-enter]
+                   [:div.infinite-loader {:ref #(reset! loader %)}])}))))
+
 (defn timeline
   "Timeline component."
   [year events]
