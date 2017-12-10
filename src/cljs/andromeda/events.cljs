@@ -3,7 +3,7 @@
             [day8.re-frame.http-fx]
             [andromeda.config :as config :refer [api-host]]))
 
-(defn json-format []
+(def json-format
   {:read (fn [xhrio] {:status (. xhrio getStatus)
                       :headers (js->clj (. xhrio getResponseHeaders) :keywordize-keys true)
                       :body (js->clj (.parse js/JSON (. xhrio getResponse)) :keywordize-keys true)})
@@ -17,7 +17,7 @@
                   :params {:per_page per-page
                            :offset offset}
                   :timeout 5000
-                  :response-format (json-format)
+                  :response-format json-format
                   :on-success [:fetch-posts-success]
                   :on-failure [:fetch-posts-failure]}
 
@@ -57,7 +57,7 @@
                   :uri (str api-host "/wp/v2/posts")
                   :params {:slug slug}
                   :timeout 5000
-                  :response-format (json-format)
+                  :response-format json-format
                   :on-success [:fetch-post-success slug]
                   :on-failure [:fetch-post-failure slug]}
 
