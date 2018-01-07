@@ -1,6 +1,7 @@
 (ns andromeda.components
   (:require [reagent.core :as reagent :refer [atom]]
             [andromeda.config :as config]
+            [andromeda.routes :refer [navigate!]]
             [andromeda.utils :refer [className date]]))
 
 (defn fa [icon]
@@ -41,18 +42,24 @@
     (map-indexed (fn [idx elem] (with-meta elem {:key idx}))
                  children)])
 
-(defn search-input
+(defn compact-search
   "A search input component."
-  ([] (search-input ""))
+  ([] (compact-search ""))
   ([initial-value]
     (let [query (atom initial-value)]
       (fn []
-        [:div.search-input
-          [:input.search-input__input
-            {:value @query
+        [:form.compact-search
+          {:action "/search"
+           :method "get"
+           :on-submit (fn [e] (.preventDefault e)
+                              (navigate! (str "/search?q=" (js/encodeURIComponent @query)))
+                              (reset! query ""))}
+          [:input.compact-search__input
+            {:name "q"
+             :value @query
              :on-change #(reset! query (-> % .-target .-value))}]
-          [:a.search-input__button
-            {:href (str "/search?q=" (js/encodeURIComponent @query))}
+          [:button.compact-search__button
+            {:type "submit"}
             [fa "search"]]]))))
 
 (defn sidebar
@@ -123,7 +130,7 @@
         [sidebar-greeting]
         [sidebar-image "/img/tmp.jpg" "That's me!"]]
       [:div.sidebar-layout__section
-        [search-input]]
+        [compact-search]]
       [:div.sidebar-layout__section
         [sidebar-notes]]]])
 
