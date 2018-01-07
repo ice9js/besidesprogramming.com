@@ -34,9 +34,12 @@
   []
   [components/page
     {:class "search"}
+    [components/logo]
     [components/sidebar-layout
       [components/main
-        [:div]]]])
+        [components/page-title "Search results"]
+        [blocks/search-query]
+        [blocks/search-results]]]])
 
 (defn post
   "Post page."

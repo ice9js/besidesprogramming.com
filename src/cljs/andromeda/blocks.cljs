@@ -47,3 +47,23 @@
              @posts-by-year)
         (when (and (< @posts-count @total-posts) (not @loading))
               [components/infinite-loader #(rf/dispatch [:fetch-posts config/posts-per-page @posts-count])])])))
+
+(defn search-query
+  "Search query panel."
+  []
+  (let [query (rf/subscribe [:search-query])]
+    [components/compact-search (js/decodeURIComponent @query)]))
+
+(defn search-results
+  "Search results feed."
+  []
+  (let [posts (rf/subscribe [:search-results])
+        query (rf/subscribe [:search-query])
+        loading (rf/subscribe [:search-results-loading])
+        results-count (rf/subscribe [:search-results-count])
+        total-results (rf/subscribe [:search-results-total])]
+    (fn []
+      [:div.search-results
+        (map #(with-meta [components/post-excerpt % false] {:key (:slug %)}) @posts)
+        (when (and (< @results-count @total-results) (not @loading))
+              [components/infinite-loader #(rf/dispatch [:fetch-search-results @query])])])))
