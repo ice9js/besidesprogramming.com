@@ -55,3 +55,29 @@
   :post-loading
   (fn [db [_ slug]]
     (reaction (get-in @db [:posts :items slug :loading]))))
+
+(rf/reg-sub-raw
+  :search-query
+  (fn [db _]
+    (reaction (get-in @db [:search :query]))))
+
+(rf/reg-sub-raw
+  :search-results
+  (fn [db _]
+    (reaction (get-in @db [:search :results]))))
+
+(rf/reg-sub-raw
+  :search-results-loading
+  (fn [db _]
+    (reaction (get-in @db [:search :loading]))))
+
+(rf/reg-sub-raw
+  :search-results-count
+  (fn [db _]
+    (let [results (reaction (get-in @db [:search :results] []))]
+      (reaction (count @results)))))
+
+(rf/reg-sub-raw
+  :search-results-total
+  (fn [db _]
+    (reaction (get-in @db [:search :total]))))

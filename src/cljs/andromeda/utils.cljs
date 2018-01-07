@@ -20,3 +20,14 @@
          " "
          (.getDate date)
          (when (not= current-year year) (str ", " year)))))
+
+(defn post-from-api
+  "Formats a post received from the API to the local format."
+  [post]
+  {:id (:id post)
+   :slug (:slug post)
+   :title (:rendered (:title post))
+   :date (:date post)
+   :content (:rendered (:content post))
+   :excerpt (:rendered (:excerpt post))
+   :status :ok})
