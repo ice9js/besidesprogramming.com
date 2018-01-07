@@ -7,53 +7,49 @@
             [goog.history.EventType :as EventType]
             [re-frame.core :as rf]))
 
+; Patch Html5History.getUrl_() as it causes issues with query strings. See:
+; https://github.com/google/closure-library/blob/be0326ba32f47ea74af4fbe8df038e579ec35215/closure/goog/history/html5history.js#L267
+(aset js/goog.history.Html5History.prototype "getUrl_"
+      (fn [token]
+        (this-as this
+          (if (.-useFragment_ this)
+              (str "#" token)
+              (str (.-pathPrefix_ this) token)))))
+
+(defonce history (Html5History.))
+(.setUseFragment history false)
+(.setPathPrefix history (str js.window.location.protocol "//" js.window.location.host))
+
 (defn get-href [element]
-  (if element
-      (or (.-href element) (get-href (.-parentNode element)))
-      ""))
-    
-  (defn get-uri [link]
-  (.getPath (.parse Uri link)))
+  (and element (or (.-href element) (get-href (.-parentNode element)))))
 
-(defn hook-browser-navigation! []
-  (let [history (doto (Html5History.)
-                  (events/listen
-                    EventType/NAVIGATE
-                    (fn [event]
-                      (secretary/dispatch! (.-token event))))
-                  (.setUseFragment false)
-                  (.setPathPrefix "")
-                  (.setEnabled true))]
-    (events/listen js/document "click"
-      (fn [e]
-        (let [link (get-href (.-target e))
-              path (get-uri link)
-              title (.-title (.-target e))]
-          (when (and
-                ; fix that to use current window location :p
-                (re-matches #"^https?://(www\.)?(localhost:?|besidesprogramming\.).*" (str "" link))
-                (secretary/locate-route path))
-            (. e stopPropagation)
-            (. e preventDefault)
-            (. history (setToken path title))))))))
+(defn navigate!
+  ([path] (navigate! path ""))
+  ([path title] (. history (setToken path title))))
 
-(defn navigate! [path title]
-  (let [history (doto (Html5History.)
-                  (events/listen
-                    EventType/NAVIGATE
-                    (fn [event]
-                      (secretary/dispatch! (.-token event))))
-                  (.setUseFragment false)
-                  (.setPathPrefix "")
-                  (.setEnabled true))]
-    (. history (setToken path title))))
+(defonce browser-navigation
+  (events/listen history EventType/NAVIGATE #(secretary/dispatch! (.-token %))))
 
-(defn app-routes []
-  (defroute "/all" [] (rf/dispatch [:load-articles nil]))
-  (defroute "/search" [] (rf/dispatch [:load-search]))
-  (defroute "/:post" [post] (rf/dispatch [:load-post post]))
-  (defroute "/" [] (rf/dispatch [:load-home-page]))
+(defonce click-navigation
+  (events/listen
+    js/document
+    "click"
+    (fn [e]
+      (when-let [href (get-href (.-target e))]
+        (let [url (.parse Uri href)
+              local? (.hasSameDomainAs url (.parse Uri js/window.location.href))
+              matches? (secretary/locate-route (.getPath url))]
+          (when (and local? matches?)
+            (.preventDefault e)
+            (navigate!
+              (str (.getPath url) (when (.hasQuery url)
+                                        (str "?" (.getQuery url))))
+              (.-title (.-target e)))))))))
 
-  (hook-browser-navigation!))
+(defroute "/all" [] (rf/dispatch [:load-articles nil]))
+(defroute "/search" [query-params] (rf/dispatch [:load-search (:q query-params)]))
+(defroute "/:post" [post] (rf/dispatch [:load-post post]))
+(defroute "/" [] (rf/dispatch [:load-home-page]))
 
-(app-routes)
+; Ensure this is executed after the route definitions
+(.setEnabled history true)
