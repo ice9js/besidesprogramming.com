@@ -28,10 +28,10 @@
 (rf/reg-event-fx
   :fetch-posts-success
   (fn [ctx [_ response]]
-    (let [results (mapv (fn [post] {:item (post-from-api post)
+    (let [results (mapv (fn [post] {:post (post-from-api post)
                                     :loading false})
                         (:body response))
-          new-posts (zipmap (map #(:slug (:item %)) results) results)
+          new-posts (zipmap (map #(:slug (:post %)) results) results)
           current-posts (get-in ctx [:db :posts :items] {})]
       {:db (-> (:db ctx)
                (assoc-in [:posts :items] (merge current-posts new-posts))
@@ -50,14 +50,15 @@
   (fn [ctx [_ slug]]
     {:http-xhrio {:method :get
                   :uri (str api-host "/wp/v2/posts")
-                  :params {:slug slug}
+                  :params {:slug slug
+                           :per_page 1}
                   :timeout 5000
                   :response-format json-format
                   :on-success [:fetch-post-success slug]
                   :on-failure [:fetch-post-failure slug]}
 
      :db (-> (:db ctx)
-             (assoc-in [:posts slug :loading] true))}))
+             (assoc-in [:posts :items slug :loading] true))}))
 
 (rf/reg-event-fx
   :fetch-post-success
@@ -65,15 +66,15 @@
     (let [post (first (mapv post-from-api (:body response)))
           slug (:slug post)]
       {:db (-> (:db ctx)
-               (assoc-in [:posts slug :item] post)
-               (assoc-in [:posts slug :loading] false))})))
+               (assoc-in [:posts :items slug :post] post)
+               (assoc-in [:posts :items slug :loading] false))})))
 
 (rf/reg-event-fx
   :fetch-post-failure
   (fn [ctx [_ slug]]
     {:db (-> (:db ctx)
-             (assoc-in [:posts slug :item] nil)
-             (assoc-in [:posts slug :loading] false))}))
+             (assoc-in [:posts :items slug :post] nil)
+             (assoc-in [:posts :items slug :loading] false))}))
 
 (rf/reg-event-fx
   :fetch-search-results

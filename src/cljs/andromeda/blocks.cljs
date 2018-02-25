@@ -8,8 +8,7 @@
 (defn post
   "Post view."
   []
-  (let [uri (rf/subscribe [:app/uri])
-        post (rf/subscribe [:post (first @uri)])]
+  (let [post (rf/subscribe [:current-post])]
     (fn []
       [:div.post
         [components/post-header @post]

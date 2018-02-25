@@ -201,12 +201,16 @@
       (share-button "twitter" "Tweet" "#")
       (share-button "pinterest" "Pin" "#")]
     [:div.post-footer__links
-      [:a.post-footer__link.is-prev
-        [:span.post-footer__link-label "previous"]
-        [:span.post-footer__link-title "I wrote that one last week."]]
-      [:a.post-footer__link.is-next
-        [:span.post-footer__link-label "next"]
-        [:span.post-footer__link-title "And this one I will write in the future."]]]])
+      (when (:previous post)
+        [:a.post-footer__link.is-prev
+          {:href (str "/" (:slug (:previous post)))}
+          [:span.post-footer__link-label "previous"]
+          [:span.post-footer__link-title (:title (:previous post))]])
+      (when (:next post)
+        [:a.post-footer__link.is-next
+          {:href (str "/" (:slug (:next post)))}
+          [:span.post-footer__link-label "next"]
+          [:span.post-footer__link-title (:title (:next post))]])]])
 
 (defn post-excerpt
   "Post excerpt block."

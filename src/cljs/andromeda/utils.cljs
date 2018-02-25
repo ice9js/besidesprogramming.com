@@ -30,4 +30,6 @@
    :date (:date post)
    :content (:rendered (:content post))
    :excerpt (:rendered (:excerpt post))
-   :status :ok})
+   :status :ok
+   :next (:next post)
+   :previous (:previous post)})

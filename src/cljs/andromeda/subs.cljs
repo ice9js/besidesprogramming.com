@@ -16,7 +16,7 @@
 (defn posts-by-date
   "Returns posts sorted by date."
   ([db] (let [items (reaction (get-in @db [:posts :items] {}))]
-          (reaction (sort-by :date #(compare %2 %1) (map :item (vals @items))))))
+          (reaction (sort-by :date #(compare %2 %1) (map :post (vals @items))))))
   ([db _] (posts-by-date db)))
 
 (rf/reg-sub-raw
@@ -47,9 +47,10 @@
     (reaction (get-in @db [:posts :loading] false))))
 
 (rf/reg-sub-raw
-  :post
-  (fn [db [_ slug]]
-    (reaction (get-in @db [:posts :items slug :item]))))
+  :current-post
+  (fn [db _]
+    (let [uri (reaction (:uri (:app @db)))]
+      (reaction (get-in @db [:posts :items (first @uri) :post])))))
 
 (rf/reg-sub-raw
   :post-loading
