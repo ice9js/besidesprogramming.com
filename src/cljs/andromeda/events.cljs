@@ -51,7 +51,8 @@
     {:http-xhrio {:method :get
                   :uri (str api-host "/wp/v2/posts")
                   :params {:slug slug
-                           :per_page 1}
+                           :per_page 1
+                           :_embed true}
                   :timeout 5000
                   :response-format json-format
                   :on-success [:fetch-post-success slug]

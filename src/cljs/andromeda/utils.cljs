@@ -28,6 +28,8 @@
    :slug (:slug post)
    :title (:rendered (:title post))
    :date (:date post)
+   :link (:link post)
+   :image (get-in post [:_embedded :wp:featuredmedia 0 :source_url] nil)
    :content (:rendered (:content post))
    :excerpt (:rendered (:excerpt post))
    :status :ok

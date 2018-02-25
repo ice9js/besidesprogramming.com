@@ -111,6 +111,8 @@
     [:a.share-button
       {:class (className {"is-small" (not action)
                           icon true})
+       :rel "noopener"
+       :target "_blank"
        :href url}
       [fa icon]
       (when action [:span.share-button__action action])]))
@@ -181,11 +183,19 @@
   [:div.post-header
     [page-title (:title post) (str "/" (:slug post))]
     [:div.post-header__meta
-      (share-button "facebook" "#")
-      (share-button "twitter" "#")
-      (share-button "pinterest" "#")
-      [:span.post-header__date (date (:date post))]
-      ]])
+      (share-button "facebook" (str "https://www.facebook.com/sharer/sharer.php?u=" (:link post)))
+      (share-button "twitter" (str "https://twitter.com/intent/tweet?url="
+                                   (:link post)
+                                   ";via=ice9js;text="
+                                   (:title post)
+                                   ";&amp;count=none"))
+      (share-button "pinterest" (str "https://pinterest.com/pin/create/button/?url="
+                                     (:link post)
+                                     "&media="
+                                     (:image post)
+                                     "&description="
+                                     (:title post)))
+      [:span.post-header__date (date (:date post))]]])
 
 (defn post-content
   "Post content container."
@@ -197,9 +207,18 @@
   [post]
   [:div.post-footer
     [:div.post-footer__share
-      (share-button "facebook" "Share" "#")
-      (share-button "twitter" "Tweet" "#")
-      (share-button "pinterest" "Pin" "#")]
+      (share-button "facebook" "Share" (str "https://www.facebook.com/sharer/sharer.php?u=" (:link post)))
+      (share-button "twitter" "Tweet" (str "https://twitter.com/intent/tweet?url="
+                                           (:link post)
+                                           ";via=ice9js;text="
+                                           (:title post)
+                                           ";&amp;count=none"))
+      (share-button "pinterest" "Pin" (str "https://pinterest.com/pin/create/button/?url="
+                                           (:link post)
+                                           "&media="
+                                           (:image post)
+                                           "&description="
+                                           (:title post)))]
     [:div.post-footer__links
       (when (:previous post)
         [:a.post-footer__link.is-prev

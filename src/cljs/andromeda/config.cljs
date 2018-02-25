@@ -8,11 +8,11 @@
                 {:label "Articles" :url "/all"}
                 {:label "About" :url "/about"}])
 
-(def social-links [{:link "#" :icon "rss"}
-                   {:link "#" :icon "slack"}
-                   {:link "#" :icon "instagram"}
-                   {:link "#" :icon "twitter"}
-                   {:link "#" :icon "facebook"}])
+(def social-links [{:link "https://besidesprogramming.com/feed/rss" :icon "rss"}
+                   {:link "https://slackin.besidesprogramming.com/" :icon "slack"}
+                   {:link "https://www.instagram.com/ice9js/" :icon "instagram"}
+                   {:link "https://twitter.com/ice9js" :icon "twitter"}
+                   {:link "https://www.facebook.com/besidesprogramming/" :icon "facebook"}])
 
 (def posts-per-page 10)
 
