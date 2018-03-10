@@ -24,10 +24,11 @@
     [components/logo]
     [components/sidebar-layout
       [components/main
-        [components/page-title "Articles"]
-        [blocks/posts-timeline]
+        [:div.articles__wrapper
+          [components/page-title "Articles"]
+          [blocks/posts-timeline]
         ; [blocks/posts-feed config/posts-per-page false]
-        ]]])
+        ]]]])
 
 (defn search
   "Search results list."
@@ -37,8 +38,9 @@
     [components/logo]
     [components/sidebar-layout
       [components/main
-        [components/page-title "Search results"]
-        [blocks/search-query]
+        [:div.search__header
+          [components/page-title "Search results"]
+          [blocks/search-query]]
         [blocks/search-results]]]])
 
 (defn post

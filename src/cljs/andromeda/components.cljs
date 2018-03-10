@@ -65,6 +65,7 @@
            :method "get"
            :on-submit (fn [e] (.preventDefault e)
                               (navigate! (str "/search?q=" (js/encodeURIComponent @query)))
+                              (set! (.-scrollTop (.getElementById js/document "page-root")) 0)
                               (reset! query ""))}
           [:input.compact-search__input
             {:name "q"
