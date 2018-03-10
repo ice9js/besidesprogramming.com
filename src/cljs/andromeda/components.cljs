@@ -18,9 +18,12 @@
 
 (defn nav
   "Site navigation."
-  [links]
+  [links close-nav]
   (let [item (fn [{label :label url :url}]
-                 [:a.nav__link {:href url} label])]
+                 [:a.nav__link
+                   {:href url
+                    :on-click close-nav}
+                   label])]
     [:div.nav
      (map #(with-meta [item %] {:key (:label %)})
           links)]))
@@ -28,12 +31,21 @@
 (defn page
   "Page layout container with navigation."
   [props & children]
-  [:div.page
-    props
-    [nav config/nav-links]
-    [:div.page__content
-      (map-indexed (fn [idx elem] (with-meta elem {:key idx}))
-                   children)]])
+  (let [is-nav-visible (atom false)
+        add-class #(merge %1 {:class (str (:class %1) " " %2)})
+        toggle-nav (fn [] (swap! is-nav-visible not)
+                        (set! (.-scrollTop (.getElementById js/document "page-root")) 0))]
+    (fn [props & children]
+      [:div#page-root.page
+        (add-class props (when @is-nav-visible "with-nav"))
+        [:div.page__content
+          [nav config/nav-links #(toggle-nav)]
+          [:div.page__nav-toggle
+            [:button.page__nav-toggle-btn
+              {:on-click #(toggle-nav)}
+              [fa (if @is-nav-visible "arrow-left" "bars")]]]
+          (map-indexed (fn [idx elem] (with-meta elem {:key idx}))
+                       children)]])))
 
 (defn main
   "Main page content."
