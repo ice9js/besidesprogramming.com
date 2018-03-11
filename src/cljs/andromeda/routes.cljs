@@ -23,9 +23,11 @@
 (defn get-href [element]
   (and element (or (.-href element) (get-href (.-parentNode element)))))
 
+; Ensure the view always scrolls up when switching pages
 (defn navigate!
   ([path] (navigate! path ""))
-  ([path title] (. history (setToken path title))))
+  ([path title] (. history (setToken path title))
+                (set! (.-scrollTop (.getElementById js/document "page-root")) 0)))
 
 (defonce browser-navigation
   (events/listen history EventType/NAVIGATE #(secretary/dispatch! (.-token %))))
