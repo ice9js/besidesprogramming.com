@@ -21,3 +21,15 @@ div {
 a, button {
   cursor: pointer;
 }
+
+@keyframes loading-pulse {
+  0% {
+    background-color: lighten( @light-grey, 5% );
+  }
+  50% {
+    background-color: @light-grey;
+  }
+  100% {
+    background-color: lighten( @light-grey, 5% );
+  }
+}

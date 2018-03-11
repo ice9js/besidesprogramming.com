@@ -10,11 +10,15 @@
   []
   (let [post (rf/subscribe [:current-post])]
     (fn []
-      [:div.post
-        [components/post-header @post]
-        [components/post-content (:content @post)]
-        [components/post-footer @post]
-        [components/disqus-thread (:id @post) (:title @post) (:slug @post)]])))
+      (let [is-loading (:loading @post)
+            post-data (:post @post)]
+        (if is-loading
+          [components/post-placeholder]
+          [:div.post
+            [components/post-header post-data]
+            [components/post-content (:content post-data)]
+            [components/post-footer post-data]
+            [components/disqus-thread (:id post-data) (:title post-data) (:slug post-data)]])))))
 
 (defn posts-feed
   "Posts feed."
@@ -29,6 +33,8 @@
         [:div.posts-feed
           (map #(with-meta [components/post-excerpt % (= % latest-post)] {:key (:slug %)})
                @posts)
+          (when @loading
+            (map #(with-meta [components/post-placeholder] {:key %}) (range per-page)))
           (when (and (< (count @posts) @total-posts) (not @loading))
                 [components/infinite-loader #(rf/dispatch [:fetch-posts per-page (count @posts)])])]))))
 
@@ -64,5 +70,8 @@
     (fn []
       [:div.search-results
         (map #(with-meta [components/post-excerpt % false] {:key (:slug %)}) @posts)
+        (when (= 0 @total-results) [:div.search-results__empty "Sorry, no results were found."])
+        (when @loading
+          (map #(with-meta [components/post-placeholder] {:key %}) (range config/posts-per-page)))
         (when (and (< @results-count @total-results) (not @loading))
               [components/infinite-loader #(rf/dispatch [:fetch-search-results @query])])])))

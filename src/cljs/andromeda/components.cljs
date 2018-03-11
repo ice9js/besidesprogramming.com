@@ -257,6 +257,16 @@
             [read-more-button "Join discussion" (str "/" (:slug post) "#disqus_thread")]
             [read-more-button "Read more" (str "/" (:slug post))])]])))
 
+(defn post-placeholder
+  "Post loading placeholder."
+  []
+  [:div.post-placeholder
+    [:div.post-placeholder__title]
+    [:div.post-placeholder__meta
+      (map #(with-meta [:div.post-placeholder__meta-button] {:key %}) (range 3))
+      [:div.post-placeholder__meta-date]]
+    (map #(with-meta [:div.post-placeholder__content-line] {:key %}) (range 4))])
+
 (defn infinite-loader
   "Triggers the given callback when scrolled into view."
   [on-enter]

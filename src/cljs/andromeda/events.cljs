@@ -105,7 +105,7 @@
           current-results (get-in ctx [:db :search :results] [])]
       {:db (-> (:db ctx)
                (assoc-in [:search :results] (concat current-results new-results))
-               (assoc-in [:search :total] (:x-wp-total (:headers response)))
+               (assoc-in [:search :total] (js/parseInt (:x-wp-total (:headers response))))
                (assoc-in [:search :loading] false))})))
 
 (rf/reg-event-fx

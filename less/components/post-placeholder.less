@@ -1,0 +1,63 @@
+.post-placeholder {
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	margin: 0 0 30px;
+	width: 100%;
+}
+
+.post-placeholder__title {
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-name: loading-pulse;
+	background-color: @light-grey;
+	height: 45px;
+	margin: 0 0 10px;
+	width: 75%;
+}
+
+.post-placeholder__meta {
+	display: flex;
+	flex-direction: row;
+	margin: 0 0 30px;
+	width: 100%;
+}
+
+.post-placeholder__meta-button {
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-name: loading-pulse;
+	background-color: @light-grey;
+	border-radius: 4px;
+	height: 22px;
+	margin: 0 7px;
+	width: 40px;
+
+	&:first-child {
+		margin-left: 0;
+	}
+}
+
+.post-placeholder__meta-date {
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-name: loading-pulse;
+	background-color: @light-grey;
+	height: 18px;
+	margin-left: 5px;
+	width: 80px;
+}
+
+.post-placeholder__content-line {
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-name: loading-pulse;
+	background-color: @light-grey;
+	height: 18px;
+	margin: 0 0 20px;
+	width: 100%;
+
+	&:last-child {
+		width: 50%;
+	}
+}

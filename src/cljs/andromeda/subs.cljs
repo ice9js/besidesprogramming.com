@@ -50,7 +50,7 @@
   :current-post
   (fn [db _]
     (let [uri (reaction (:uri (:app @db)))]
-      (reaction (get-in @db [:posts :items (first @uri) :post])))))
+      (reaction (get-in @db [:posts :items (first @uri)])))))
 
 (rf/reg-sub-raw
   :post-loading
