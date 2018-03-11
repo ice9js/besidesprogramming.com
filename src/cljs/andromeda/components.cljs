@@ -57,7 +57,8 @@
 (defn compact-search
   "A search input component."
   ([] (compact-search ""))
-  ([initial-value]
+  ([initial-value] (compact-search initial-value false))
+  ([initial-value clear-on-submit]
     (let [query (atom initial-value)]
       (fn []
         [:form.compact-search
@@ -65,8 +66,7 @@
            :method "get"
            :on-submit (fn [e] (.preventDefault e)
                               (navigate! (str "/search?q=" (js/encodeURIComponent @query)))
-                              (set! (.-scrollTop (.getElementById js/document "page-root")) 0)
-                              (reset! query ""))}
+                              (when clear-on-submit (reset! query "")))}
           [:input.compact-search__input
             {:name "q"
              :value @query
@@ -145,7 +145,7 @@
         [sidebar-greeting]
         [sidebar-image "/img/tmp.jpg" "That's me!"]]
       [:div.sidebar-layout__section
-        [compact-search]]
+        [compact-search "" false]]
       [:div.sidebar-layout__section
         [sidebar-notes]]]])
 
