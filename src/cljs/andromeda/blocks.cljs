@@ -13,12 +13,14 @@
       (let [is-loading (:loading @post)
             post-data (:post @post)]
         (if is-loading
-          [components/post-placeholder]
-          [:div.post
-            [components/post-header post-data]
-            [components/post-content (:content post-data)]
-            [components/post-footer post-data]
-            [components/disqus-thread (:id post-data) (:title post-data) (:slug post-data)]])))))
+            [components/post-placeholder]
+            (if (not post-data)
+                [components/error 404 "Oops! This page does not exist."]
+                [:div.post
+                  [components/post-header post-data]
+                  [components/post-content (:content post-data)]
+                  [components/post-footer post-data]
+                  [components/disqus-thread (:id post-data) (:title post-data) (:slug post-data)]]))))))
 
 (defn posts-feed
   "Posts feed."

@@ -64,11 +64,14 @@
 (rf/reg-event-fx
   :fetch-post-success
   (fn [ctx [_ slug response]]
-    (let [post (first (mapv post-from-api (:body response)))
-          slug (:slug post)]
-      {:db (-> (:db ctx)
-               (assoc-in [:posts :items slug :post] post)
-               (assoc-in [:posts :items slug :loading] false))})))
+    ; WP API returns an 200 with an empty array if a post doesn't exist
+    (if (empty (:body response))
+        {:dispatch [:fetch-post-failure slug]}
+        (let [post (first (mapv post-from-api (:body response)))
+              slug (:slug post)]
+          {:db (-> (:db ctx)
+                   (assoc-in [:posts :items slug :post] post)
+                   (assoc-in [:posts :items slug :loading] false))}))))
 
 (rf/reg-event-fx
   :fetch-post-failure

@@ -175,6 +175,13 @@
 
                          [:div#disqus_thread.disqus-thread])})))
 
+(defn error
+  "Error page."
+  [code message]
+  [:div.error
+    [:div.error__message message]
+    [:div.error__code code]])
+
 (defn read-more-button
   "Action button for posts."
   [action url]
