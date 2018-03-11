@@ -285,7 +285,7 @@
                      (with-meta
                        [:li.timeline__event
                          [:a
-                           {:href (:url event)}
+                           {:href (str "/" (:slug event))}
                            [:span.timeline__date (date (:date event))]
                            [:h2.timeline__event-title (:title event)]]]
                        {:key idx}))
