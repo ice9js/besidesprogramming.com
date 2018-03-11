@@ -175,10 +175,10 @@
 
                          [:div#disqus_thread.disqus-thread])})))
 
-(defn post-action-button
+(defn read-more-button
   "Action button for posts."
   [action url]
-  [:a.post-action-button {:href url} action])
+  [:a.read-more-button {:href url} action [fa "angle-double-right"]])
 
 (defn page-title
   "Page title header."
@@ -254,9 +254,8 @@
         [post-content (content post)]
         [:div.post-excerpt__actions
           (if full-content
-            [post-action-button [:span [fa "comment"] "Join discussion"]
-                                (str "/" (:slug post) "#disqus_thread")]
-            [post-action-button "Read more…" (str "/" (:slug post))])]])))
+            [read-more-button "Join discussion" (str "/" (:slug post) "#disqus_thread")]
+            [read-more-button "Read more" (str "/" (:slug post))])]])))
 
 (defn infinite-loader
   "Triggers the given callback when scrolled into view."
