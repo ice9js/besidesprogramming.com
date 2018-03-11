@@ -47,8 +47,7 @@
   "Post page."
   []
   [components/page
-    ; class post is already in use :o
-    {}
+    {:class "post-page"}
     [components/logo]
     [components/sidebar-layout
       [components/main

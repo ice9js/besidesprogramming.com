@@ -16,7 +16,7 @@
 (defn posts-by-date
   "Returns posts sorted by date."
   ([db] (let [items (reaction (get-in @db [:posts :items] {}))]
-          (reaction (sort-by :date #(compare %2 %1) (map :post (vals @items))))))
+          (reaction (sort-by :date #(compare %2 %1) (filter identity (map :post (vals @items)))))))
   ([db _] (posts-by-date db)))
 
 (rf/reg-sub-raw
@@ -33,8 +33,9 @@
 (rf/reg-sub-raw
   :posts-count
   (fn [db _]
-    (let [posts (reaction (get-in @db [:posts :items] {}))]
-      (reaction (count (vals @posts))))))
+    (let [posts (reaction (get-in @db [:posts :items] {}))
+          non-empty-posts (reaction (filter :post @posts))]
+      (reaction (count (vals @non-empty-posts))))))
 
 (rf/reg-sub-raw
   :posts-total
