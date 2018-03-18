@@ -1,0 +1,30 @@
+.search-link {
+  color: @text-content;
+  font-family: @montserrat;
+  font-size: 28px;
+  margin: 0 0 30px;
+  text-align: right;
+
+  i {
+    margin: 0 0 0 15px;
+  }
+
+  @media @desktop {
+    color: @dark-grey;
+    text-align: left;
+    transition: color .2s;
+
+    &:hover {
+      color: @black;
+    }
+
+    &::after {
+      content: "...";
+      display: inline-block;
+    }
+
+    i {
+      display: none;
+    }
+  }
+}

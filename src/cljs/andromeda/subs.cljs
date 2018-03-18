@@ -4,38 +4,21 @@
             [andromeda.config :as config]))
 
 (rf/reg-sub-raw
-  :app/view
+  :app/route
   (fn [db _]
-    (reaction (:view (:app @db)))))
-
-(rf/reg-sub-raw
-  :app/uri
-  (fn [db _]
-    (reaction (:uri (:app @db)))))
-
-(defn posts-by-date
-  "Returns posts sorted by date."
-  ([db] (let [items (reaction (get-in @db [:posts :items] {}))]
-          (reaction (sort-by :date #(compare %2 %1) (filter identity (map :post (vals @items)))))))
-  ([db _] (posts-by-date db)))
+    (reaction (get-in @db [:app :route] {:path "" :query {}}))))
 
 (rf/reg-sub-raw
   :posts
-  posts-by-date)
-
-(rf/reg-sub-raw
-  :posts-by-year
   (fn [db _]
-    (let [sorted-posts (posts-by-date db)]
-      (reaction (group-by #(.getFullYear (js/Date. (:date %)))
-                          @sorted-posts)))))
+    (let [items (reaction (get-in @db [:posts :items] []))]
+      (reaction (sort-by :date #(compare %2 %1) (filter identity @items))))))
 
 (rf/reg-sub-raw
   :posts-count
   (fn [db _]
-    (let [posts (reaction (get-in @db [:posts :items] {}))
-          non-empty-posts (reaction (filter :post @posts))]
-      (reaction (count (vals @non-empty-posts))))))
+    (let [posts (reaction (get-in @db [:posts :items]))]
+      (reaction (count @posts)))))
 
 (rf/reg-sub-raw
   :posts-total
@@ -48,38 +31,12 @@
     (reaction (get-in @db [:posts :loading] false))))
 
 (rf/reg-sub-raw
-  :current-post
-  (fn [db _]
-    (let [uri (reaction (:uri (:app @db)))]
-      (reaction (get-in @db [:posts :items (first @uri)])))))
-
-(rf/reg-sub-raw
-  :post-loading
+  :post
   (fn [db [_ slug]]
-    (reaction (get-in @db [:posts :items slug :loading]))))
+    (let [posts (reaction (get-in @db [:posts :items]))]
+      (reaction (first (filter #(= slug (:slug %)) @posts))))))
 
 (rf/reg-sub-raw
   :search-query
   (fn [db _]
     (reaction (get-in @db [:search :query]))))
-
-(rf/reg-sub-raw
-  :search-results
-  (fn [db _]
-    (reaction (get-in @db [:search :results]))))
-
-(rf/reg-sub-raw
-  :search-results-loading
-  (fn [db _]
-    (reaction (get-in @db [:search :loading]))))
-
-(rf/reg-sub-raw
-  :search-results-count
-  (fn [db _]
-    (let [results (reaction (get-in @db [:search :results] []))]
-      (reaction (count @results)))))
-
-(rf/reg-sub-raw
-  :search-results-total
-  (fn [db _]
-    (reaction (get-in @db [:search :total]))))
