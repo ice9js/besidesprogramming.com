@@ -21,17 +21,17 @@
          (.getDate date)
          (when (not= current-year year) (str ", " year)))))
 
-(defn post-from-api
-  "Formats a post received from the API to the local format."
-  [post]
-  {:id (:id post)
-   :slug (:slug post)
-   :title (:rendered (:title post))
-   :date (:date post)
-   :link (:link post)
-   :image (get-in post [:_embedded :wp:featuredmedia 0 :source_url] nil)
-   :content (:rendered (:content post))
-   :excerpt (:rendered (:excerpt post))
-   :status :ok
-   :next (:next post)
-   :previous (:previous post)})
+(defn facebook-link
+  "Returns a share link for Facebook."
+  [{link :link}]
+  (str "https://www.facebook.com/sharer/sharer.php?u=" link))
+
+(defn twitter-link
+  "Returns a share link for Twitter."
+  [{link :link title :title}]
+  (str "https://twitter.com/intent/tweet?url=" link ";via=ice9js;text=" title ";&amp;count=none"))
+
+(defn pinterest-link
+  "Returns a share link for Pinterest."
+  [{image :image link :link title :title}]
+  (str "https://pinterest.com/pin/create/button/?url=" link "&media=" image "&description=" title))

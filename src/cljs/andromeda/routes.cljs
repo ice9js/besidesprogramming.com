@@ -27,7 +27,7 @@
 (defn navigate!
   ([path] (navigate! path ""))
   ([path title] (. history (setToken path title))
-                (set! (.-scrollTop (.getElementById js/document "page-root")) 0)))
+                (set! (.-scrollTop (.getElementById js/document "app")) 0)))
 
 (defonce browser-navigation
   (events/listen history EventType/NAVIGATE #(secretary/dispatch! (.-token %))))
@@ -48,10 +48,7 @@
                                         (str "?" (.getQuery url))))
               (.-title (.-target e)))))))))
 
-(defroute "/all" [] (rf/dispatch [:load-articles nil]))
-(defroute "/search" [query-params] (rf/dispatch [:load-search (:q query-params)]))
-(defroute "/:post" [post] (rf/dispatch [:load-post post]))
-(defroute "/" [] (rf/dispatch [:load-home-page]))
+(defroute "/*" [* query-params] (rf/dispatch [:update-route * query-params]))
 
 ; Ensure this is executed after the route definitions
 (.setEnabled history true)

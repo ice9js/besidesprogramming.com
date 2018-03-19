@@ -1,22 +1,29 @@
 (ns andromeda.app
   (:require [reagent.core :as reagent :refer [atom]]
             [re-frame.core :as rf]
-            [andromeda.routes]
-            [andromeda.db]
             [andromeda.events]
             [andromeda.subs]
+            [andromeda.routes]
+            [andromeda.components :as components]
             [andromeda.views :as views]))
 
 (defmulti sites identity)
-(defmethod sites :home [] (views/home))
-(defmethod sites :articles [] (views/articles))
-(defmethod sites :search [] (views/search))
-(defmethod sites :post [] (views/post))
+(defmethod sites :home [] [views/home])
+(defmethod sites :category [] [views/category])
+(defmethod sites :archive [] [views/archive])
+(defmethod sites :search [] [views/search])
+(defmethod sites :post [] [views/post])
 
 (defn app []
-  (let [site (rf/subscribe [:app/view])]
-    (fn []
-      (sites @site))))
+  (let [current-route (rf/subscribe [:app/route])
+        site (case (:path @current-route)
+                       "" :home
+                       ("thoughts" "programming" "travel" "photos") :category
+                       "search" :search
+                       "archive" :archive
+                       :post)]
+    [components/page
+      (sites site)]))
 
 (defn init []
   (reagent/render-component [app]
