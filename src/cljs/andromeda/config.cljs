@@ -23,6 +23,9 @@
                    {:link "https://twitter.com/ice9js" :icon "twitter"}
                    {:link "https://www.facebook.com/besidesprogramming/" :icon "facebook"}])
 
+; (def ga-tracker-id "UA-88781129-1")
+(def ga-tracker-id nil)
+
 (def posts-per-page 10)
 
 (def posts-on-home-page 5)

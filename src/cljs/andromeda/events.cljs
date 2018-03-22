@@ -3,10 +3,21 @@
             [day8.re-frame.http-fx]
             [andromeda.config :as config :refer [api-host]]))
 
+(rf/reg-fx
+  :ga-page-view
+  (fn [uri]
+    (when (and config/ga-tracker-id (.-gtag js/window))
+          (.log js/console uri)
+          (.gtag js/window "config" config/ga-tracker-id (clj->js {:page_path uri})))))
+
 (rf/reg-event-fx
   :update-route
   (fn [ctx [_ path query]]
-    {:db (-> (:db ctx)
+    {:ga-page-view (str (str "/" path)
+                        (when-not (empty? query)
+                                  (str "?" (clojure.string/join "&" (map #(str (name %) "=" (% query)) (keys query))))))
+
+     :db (-> (:db ctx)
              (assoc-in [:app :route] {:path (clojure.string/trim path)
                                       :query query}))}))
 
