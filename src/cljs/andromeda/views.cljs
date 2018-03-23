@@ -14,6 +14,7 @@
     (fn []
       [components/single-column
         {:class "home"}
+        [components/page-title "Home - Besides Programming"]
         [blocks/posts-feed {:per_page config/posts-per-page}]
         (when (and (not @loading) (< config/posts-per-page @count))
               [components/view-all-button 2])])))
@@ -28,6 +29,7 @@
       (let [category (first (filter #(= (:path @route) (:slug %)) config/post-categories))]
         [components/single-column
           {:class "category"}
+          [components/page-title (str (:label category) " - Besides Programming")]
           [components/page-header (:label category)]
           [blocks/posts-feed {:per_page config/posts-per-page
                               :categories [(:id category)]}]
@@ -44,6 +46,7 @@
             offset (* config/posts-per-page page)]
         [components/single-column
           {:class "archive"}
+          [components/page-title (str "Archive - Page " (+ 1 page) " - Besides Programming")]
           [components/page-header "Archive"]
           [blocks/posts-feed {:per_page config/posts-per-page
                               :offset offset}]
@@ -60,6 +63,9 @@
             offset (* config/posts-per-page page)]
         [components/single-column
           {:class "search"}
+          [components/page-title (if (not (empty? query))
+                                     (str "Search results for: " query " - Page " (+ 1 page) " - Besides Programming")
+                                     "Search - Besides Programming")]
           [components/page-header "Search"]
           [components/search-form query]
           (when (and (not (empty? query)))

@@ -21,6 +21,7 @@
           (if (not @post)
               [components/error 404 "Oops! This page does not exist."]
               [:div
+                [components/page-title (str (:title @post) " - Besides Programming")]
                 [components/post-header @post]
                 [components/post-content (:content @post)]
                 [components/post-footer @post]

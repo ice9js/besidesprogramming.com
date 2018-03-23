@@ -4,6 +4,17 @@
             [andromeda.routes :refer [navigate!]]
             [andromeda.utils :refer [className date facebook-link twitter-link pinterest-link]]))
 
+(defn page-title
+  "Updates the metadata for the current page."
+  [title]
+  (let [update-title (fn [this] (let [title (first (reagent/children this))]
+                                  (when-not (empty? title) (set! (.-title js/document) title))))]
+    (reagent/create-class
+      {:component-did-mount update-title
+       :component-did-update update-title
+       :display-name "page-title"
+       :reagent-render (fn [] nil)})))
+
 (defn fa [icon]
   "Font awesome icons."
   [:i.fa {:class (str "fa-" icon)}])
