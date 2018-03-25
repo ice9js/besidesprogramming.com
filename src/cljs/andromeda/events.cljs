@@ -44,7 +44,6 @@
 (rf/reg-event-fx
   :query-posts
   (fn [ctx [_ query]]
-    (.log js/console query)
     {:http-xhrio {:method :get
                   :uri (str (:api-host config) "/wp/v2/posts")
                   :params query
