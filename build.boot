@@ -45,7 +45,8 @@
 
 (deftask production []
   (task-options! environ {:env {:cljs-env "production"}}
-                 cljs {:optimizations :advanced}
+                 cljs {:optimizations :advanced
+                       :externs ["externs/disqus.js", "externs/ga.js"]}
                  less {:compression true})
   identity)
 
