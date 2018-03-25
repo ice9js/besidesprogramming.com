@@ -1,14 +1,13 @@
 (ns andromeda.events
   (:require [re-frame.core :as rf]
             [day8.re-frame.http-fx]
-            [andromeda.config :as config :refer [api-host]]))
+            [andromeda.config :refer [config]]))
 
 (rf/reg-fx
   :ga-page-view
   (fn [uri]
-    (when (and config/ga-tracker-id (.-gtag js/window))
-          (.log js/console uri)
-          (.gtag js/window "config" config/ga-tracker-id (clj->js {:page_path uri})))))
+    (when (and (:ga-tracker-id config) (.-gtag js/window))
+          (.gtag js/window "config" (:ga-tracker-id config) (clj->js {:page_path uri})))))
 
 (rf/reg-event-fx
   :update-route
@@ -46,7 +45,7 @@
   :query-posts
   (fn [ctx [_ query]]
     {:http-xhrio {:method :get
-                  :uri (str api-host "/wp/v2/posts")
+                  :uri (str (:api-host config) "/wp/v2/posts")
                   :params query
                   :timeout 3000
                   :response-format json-format

@@ -1,7 +1,6 @@
 (ns andromeda.blocks
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
-            [andromeda.config :as config]
             [andromeda.components :as components]
             [andromeda.data :as data]
             [andromeda.utils :refer [date]]))

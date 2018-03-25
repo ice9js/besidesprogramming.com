@@ -1,5 +1,5 @@
 (set-env!
- :source-paths    #{"src/cljs" "less"}
+ :source-paths    #{"src/clj" "src/cljs" "less"}
  :resource-paths  #{"resources"}
  :dependencies '[[adzerk/boot-cljs        "1.7.228-2" :scope "test"]
                  [adzerk/boot-cljs-repl   "0.3.3"     :scope "test"]
@@ -9,6 +9,8 @@
                  [org.clojure/tools.nrepl "0.2.12"    :scope "test"]
                  [weasel                  "0.7.0"     :scope "test"]
                  [deraen/boot-less        "0.6.2"     :scope "test"]
+                 [environ "1.1.0"]
+                 [boot-environ "1.1.0"]
                  [org.clojure/clojurescript "1.9.293"]
                  [reagent "0.6.0"]
                  [re-frame "0.9.3"]
@@ -20,11 +22,13 @@
  '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
  '[adzerk.boot-reload    :refer [reload]]
  '[pandeiro.boot-http    :refer [serve]]
- '[deraen.boot-less      :refer [less]])
+ '[deraen.boot-less      :refer [less]]
+ '[environ.boot          :refer [environ]])
 
 (deftask build []
   (comp (speak)
 
+        (environ)
         (cljs)
 
         (less)
@@ -40,12 +44,14 @@
         (build)))
 
 (deftask production []
-  (task-options! cljs {:optimizations :advanced}
+  (task-options! environ {:env {:cljs-env "production"}}
+                 cljs {:optimizations :advanced}
                  less {:compression true})
   identity)
 
 (deftask development []
-  (task-options! cljs {:optimizations :none}
+  (task-options! environ {:env {:cljs-env "development"}}
+                 cljs {:optimizations :none}
                  reload {:on-jsload 'andromeda.app/init}
                  less {:source-map true})
   identity)

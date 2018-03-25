@@ -1,6 +1,6 @@
 (ns andromeda.components
   (:require [reagent.core :as reagent :refer [atom]]
-            [andromeda.config :as config]
+            [andromeda.config :refer [config]]
             [andromeda.routes :refer [navigate!]]
             [andromeda.utils :refer [className date facebook-link twitter-link pinterest-link]]))
 
@@ -53,7 +53,7 @@
                             :on-click on-click}
                            (:label %)]]
                        {:key (:label %)})
-           config/main-nav)]))
+           (:nav config))]))
 
 (defn search-link
   "Search link."
@@ -70,7 +70,7 @@
   []
   [:ul.social-links
     (map #(with-meta [:li.social-links__item [social-button (:icon %) (:link %)]] {:key (:icon %)})
-         config/social-links)])
+         (:social-links config))])
 
 (defn nav
   "Site navigation."
