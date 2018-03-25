@@ -6,7 +6,7 @@
 (rf/reg-fx
   :ga-page-view
   (fn [uri]
-    (when (and (:ga-tracker-id config) (.-gtag js/window))
+    (when (:ga-tracker-id config)
           (.gtag js/window "config" (:ga-tracker-id config) (clj->js {:page_path uri})))))
 
 (rf/reg-event-fx

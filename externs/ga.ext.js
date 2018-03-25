@@ -1,1 +1,2 @@
-window.gtag = function() {};
+window.dataLayer = [];
+window.gtag = function(){};
