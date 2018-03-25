@@ -12,9 +12,9 @@
                  [environ "1.1.0"]
                  [boot-environ "1.1.0"]
                  [org.clojure/clojurescript "1.9.293"]
-                 [reagent "0.6.0"]
-                 [re-frame "0.9.3"]
-                 [day8.re-frame/http-fx "0.1.4"]
+                 [reagent "0.7.0"]
+                 [re-frame "0.10.5"]
+                 [day8.re-frame/http-fx "0.1.6"]
                  [secretary "1.2.3"]])
 
 (require
