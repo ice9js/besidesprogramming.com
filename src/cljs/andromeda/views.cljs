@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [re-frame.core :as rf]
             [andromeda.blocks :as blocks]
+            [andromeda.config :refer [config]]
             [andromeda.components :as components]
             [andromeda.routes :refer [navigate!]]
             [andromeda.config :refer [config]]))
@@ -14,7 +15,7 @@
     (fn []
       [components/single-column
         {:class "home"}
-        [components/page-title "Home - Besides Programming"]
+        [components/page-title (str "Home - " (:app-name config))]
         [blocks/posts-feed {:per_page (:posts-per-page config)}]
         (when (and (not @loading) (< (:posts-per-page config) @count))
               [components/view-all-button 2])])))
@@ -29,7 +30,7 @@
       (let [category (first (filter #(= (:path @route) (:slug %)) (:post-categories config)))]
         [components/single-column
           {:class "category"}
-          [components/page-title (str (:label category) " - Besides Programming")]
+          [components/page-title (str (:label category) " - " (:app-name config))]
           [components/page-header (:label category)]
           [blocks/posts-feed {:per_page (:posts-per-page config)
                               :categories [(:id category)]}]
@@ -46,7 +47,7 @@
             offset (* (:posts-per-page config) page)]
         [components/single-column
           {:class "archive"}
-          [components/page-title (str "Archive - Page " (+ 1 page) " - Besides Programming")]
+          [components/page-title (str "Archive - Page " (+ 1 page) " - " (:app-name config))]
           [components/page-header "Archive"]
           [blocks/posts-feed {:per_page (:posts-per-page config)
                               :offset offset}]
@@ -64,8 +65,8 @@
         [components/single-column
           {:class "search"}
           [components/page-title (if (not (empty? query))
-                                     (str "Search results for: " query " - Page " (+ 1 page) " - Besides Programming")
-                                     "Search - Besides Programming")]
+                                     (str "Search results for: " query " - Page " (+ 1 page) " - " (:app-name config))
+                                     (str "Search - " (:app-name config)))]
           [components/page-header "Search"]
           [components/search-form query]
           (when (and (not (empty? query)))

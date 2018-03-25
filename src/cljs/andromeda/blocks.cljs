@@ -1,6 +1,7 @@
 (ns andromeda.blocks
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
+            [andromeda.config :refer [config]]
             [andromeda.components :as components]
             [andromeda.data :as data]
             [andromeda.utils :refer [date]]))
@@ -20,7 +21,7 @@
           (if (not @post)
               [components/error 404 "Oops! This page does not exist."]
               [:div
-                [components/page-title (str (:title @post) " - Besides Programming")]
+                [components/page-title (str (:title @post) " - " (:app-name config))]
                 [components/post-header @post]
                 [components/post-content (:content @post)]
                 [components/post-footer @post]
