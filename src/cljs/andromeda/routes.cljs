@@ -52,3 +52,6 @@
 
 ; Ensure this is executed after the route definitions
 (.setEnabled history true)
+
+; Trigger the initial route
+(navigate! (str (.-pathname (.-location js/window)) (.-search (.-location js/window))))
