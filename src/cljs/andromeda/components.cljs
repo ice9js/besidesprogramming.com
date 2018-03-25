@@ -227,8 +227,8 @@
 (defn disqus-thread
   "Loads a Disqus comments thread."
   [id title path]
-  (let [shortname "besidesprogramming-dev"
-        website-url "https://besidesprogramming.com"
+  (let [shortname (:disqus-shortname config)
+        website-url (:domain config)
         load-disqus #(if (.-DISQUS js/window)
                          (.reset (.-DISQUS js/window) #js {:reload true})
                          (.appendChild (or (.-head js/document) (.-body js/document))

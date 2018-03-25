@@ -1,5 +1,5 @@
 {:app-name "Besides Programming"
- :domain "besidesprogramming.com"
+ :domain "https://besidesprogramming.com"
  :api-host "https://besidesprogramming.com/wp-json"
 
  :post-categories [{:id 2 :label "Thoughts" :slug "thoughts"}
@@ -22,5 +22,6 @@
 
  :ga-tracker-id "UA-88781129-1"
 
- :posts-per-page 10
-}
+ :disqus-shortname "besidesprogramming"
+
+ :posts-per-page 10}

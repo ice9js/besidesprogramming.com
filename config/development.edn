@@ -1,5 +1,5 @@
 {:app-name "Besides Programming"
- :domain "besidesprogramming.com"
+ :domain "https://besidesprogramming.com"
  :api-host "https://besidesprogramming.com/wp-json"
 
  :post-categories [{:id 2 :label "Thoughts" :slug "thoughts"}
@@ -20,7 +20,8 @@
                 {:link "https://twitter.com/ice9js" :icon "twitter"}
                 {:link "https://www.facebook.com/besidesprogramming/" :icon "facebook"}]
 
- :ga-tracker-id nil
+ :ga-tracker-id "UA-88781129-1"
 
- :posts-per-page 10
-}
+ :disqus-shortname "besidesprogramming-dev"
+
+ :posts-per-page 10}
