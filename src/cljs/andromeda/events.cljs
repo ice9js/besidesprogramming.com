@@ -6,8 +6,7 @@
 (rf/reg-fx
   :ga-page-view
   (fn [uri]
-    (when (:ga-tracker-id config)
-          (.gtag js/window "config" (:ga-tracker-id config) (clj->js {:page_path uri})))))
+    (when (:ga-tracker-id config) nil)))
 
 (rf/reg-event-fx
   :update-route
