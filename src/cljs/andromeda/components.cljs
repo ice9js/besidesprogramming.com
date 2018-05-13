@@ -178,16 +178,12 @@
 
 (defn post-excerpt
   "Post excerpt block."
-  ([post] (post-excerpt post false))
-  ([post full-content]
-    (let [content (if full-content :content :excerpt)]
-      [:div.post-excerpt
-        [post-header post]
-        [post-content (content post)]
-        [:div.post-excerpt__actions
-          (if full-content
-            [read-more-button "Join discussion" (str "/" (:slug post) "#disqus_thread")]
-            [read-more-button "Read more" (str "/" (:slug post))])]])))
+  [post]
+  [:div.post-excerpt
+    [post-header post]
+    [post-content (:excerpt post)]
+    [:div.post-excerpt__actions
+      [read-more-button "Continue reading" (str "/" (:slug post))]]])
 
 (defn view-all-button
   "View archive button."
