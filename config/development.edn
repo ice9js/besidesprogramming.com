@@ -14,11 +14,21 @@
        {:label "Photos" :url "/photos"}
        {:label "About" :url "/about"}]
 
- :social-links [{:link "https://besidesprogramming.com/feed/rss" :icon "rss"}
-                {:link "https://slackin.besidesprogramming.com/" :icon "slack"}
-                {:link "https://www.instagram.com/ice9js/" :icon "instagram"}
-                {:link "https://twitter.com/ice9js" :icon "twitter"}
-                {:link "https://www.facebook.com/besidesprogramming/" :icon "facebook"}]
+ :social-links [{:title "RSS Feed" 
+                 :link "https://besidesprogramming.com/feed/rss"
+                 :icon "rss"}
+                {:title "Slack"
+                 :link "https://slackin.besidesprogramming.com/"
+                 :icon "slack"}
+                {:title "Instagram"
+                 :link "https://www.instagram.com/ice9js/"
+                 :icon "instagram"}
+                {:title "Twitter"
+                 :link "https://twitter.com/ice9js"
+                 :icon "twitter"}
+                {:title "Facebook"
+                 :link "https://www.facebook.com/besidesprogramming/"
+                 :icon "facebook"}]
 
  :ga-tracker-id "UA-88781129-1"
 

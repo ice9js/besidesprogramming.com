@@ -31,15 +31,17 @@
   []
   [:a.logo
    {:href "/"}
+   [:span.sr-only "Besides Programming - Home"]
    [:div.logo__img]])
 
 (defn social-button
   "Social media links."
-  [icon url]
+  [title icon url]
   [:a.social-button
     {:href url
      :rel "noopener"
      :target "_blank"}
+    [:span.sr-only (str title " (Opens in a new window)")]
     [fa icon]])
 
 (defn site-links
@@ -69,7 +71,7 @@
   "Social navigation."
   []
   [:ul.social-links
-    (map #(with-meta [:li.social-links__item [social-button (:icon %) (:link %)]] {:key (:icon %)})
+    (map #(with-meta [:li.social-links__item [social-button (:title %) (:icon %) (:link %)]] {:key (:icon %)})
          (:social-links config))])
 
 (defn nav
@@ -142,16 +144,17 @@
 
 (defn share-button
   "Share buttons for social media."
-  ([icon url] (share-button icon nil url))
-  ([icon action url]
+  ([service url] (share-button service nil url))
+  ([service action url]
     [:a.share-button
       {:class (className {"is-small" (not action)
-                          icon true})
+                          service true})
        :rel "noopener"
        :target "_blank"
        :href url}
-      [fa icon]
-      (when action [:span.share-button__action action])]))
+      [fa service]
+      (when action [:span.share-button__action action])
+      [:span.sr-only (str " Share on " service " (Opens in a new window)")]]))
 
 (defn post-header
   "Post header including share buttons & date."
