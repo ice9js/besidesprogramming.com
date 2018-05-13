@@ -293,7 +293,15 @@
 
 (defn error
   "Error page."
-  [code message]
-  [:div.error
-    [:div.error__message message]
-    [:div.error__code code]])
+  [code]
+  (let [header (case code
+                     404 "Oops! This page does not exist."
+                     503 "Sorry :( \nThe service is unavailable."
+                     "Yikes! That didn't work.")
+        message (case code
+                      503 "This message might've been caused by a poor connection. \nEnsure you're connected to the internet and check back later."
+                      nil)]
+    [:div.error
+      [:div.error__header header]
+      (when message [:div.error__message message])
+      [:div.error__code code]]))

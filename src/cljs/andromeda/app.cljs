@@ -17,11 +17,11 @@
 (defn app []
   (let [current-route (rf/subscribe [:app/route])
         site (case (:path @current-route)
-                       "" :home
-                       ("thoughts" "programming" "travel" "photos") :category
-                       "search" :search
-                       "archive" :archive
-                       :post)]
+                   "" :home
+                   ("thoughts" "programming" "travel" "photos") :category
+                   "search" :search
+                   "archive" :archive
+                   :post)]
     [components/page
       (sites site)]))
 

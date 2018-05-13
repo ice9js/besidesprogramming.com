@@ -10,6 +10,7 @@
   "Post view."
   [slug]
   (let [post (rf/subscribe [:post slug])
+        error (rf/subscribe [:error-status])
         loading (rf/subscribe [:posts-loading])]
     [:div.post
       [data/query-posts
@@ -18,8 +19,8 @@
          :_embed true}]
       (if @loading
           [components/post-placeholder]
-          (if (not @post)
-              [components/error 404 "Oops! This page does not exist."]
+          (if @error
+              [components/error @error]
               [:div
                 [components/page-title (str (:title @post) " - " (:app-name config))]
                 [components/post-header @post]
@@ -31,12 +32,15 @@
   "Posts feed."
   [query]
   (let [posts (rf/subscribe [:posts])
+        error (rf/subscribe [:error-status])
         loading (rf/subscribe [:posts-loading])
         total-posts (rf/subscribe [:posts-total])]
     (fn [query]
       [:div.posts-feed
         [data/query-posts query]
-        (map #(with-meta [components/post-excerpt %] {:key (:slug %)})
-             @posts)
-        (when @loading
-          (map #(with-meta [components/post-placeholder] {:key %}) (range 3)))])))
+        (if @loading
+            (map #(with-meta [components/post-placeholder] {:key %}) (range 3))
+            (if @error
+              [components/error @error]
+              (map #(with-meta [components/post-excerpt %] {:key (:slug %)})
+                   @posts)))])))

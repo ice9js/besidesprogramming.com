@@ -39,3 +39,8 @@
   :search-query
   (fn [db _]
     (reaction (get-in @db [:search :query]))))
+
+(rf/reg-sub-raw
+  :error-status
+  (fn [db _]
+    (reaction (get-in @db [:posts :error]))))

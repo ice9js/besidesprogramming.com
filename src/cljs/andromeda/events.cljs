@@ -52,7 +52,7 @@
                   :on-failure [:query-posts-failure]}
 
      :db (-> (:db ctx)
-             (assoc-in [:posts :error] false)
+             (assoc-in [:posts :error] nil)
              (assoc-in [:posts :loading] true)
              (assoc-in [:posts :items] []))}))
 
@@ -67,8 +67,8 @@
 
 (rf/reg-event-fx
   :query-posts-failure
-  (fn [ctx _]
+  (fn [ctx [_ response]]
     {:db (-> (:db ctx)
-             (assoc-in [:posts :error] true)
+             (assoc-in [:posts :error] (:status response))
              (assoc-in [:posts :total] 0)
              (assoc-in [:posts :loading] false))}))
