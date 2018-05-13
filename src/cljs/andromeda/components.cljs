@@ -108,6 +108,7 @@
                            [logo]
                            [:button.mobile-nav__toggle
                              {:class (when @show-menu "is-active")
+                              :title "Menu"
                               :on-click #(toggle-menu)}
                              [fa (if @show-menu "times" "bars")]]
                            [:div.mobile-nav__menu
@@ -262,14 +263,21 @@
                       [:button.pagination__button
                         {:class (when (= n page) "is-active")
                          :disabled (= n "more")
+                         :title (when (not= n "more") (str "Page " (+ n 1)))
                          :on-click (when (not= n "more") #(on-click n))}
                         (if (= n "more")
                             [fa "ellipsis-h"]
                             (+ n 1))])]
     [:div.pagination
-      [:button.pagination__button {:disabled (= 0 page)} [fa "angle-double-left"]]
+      [:button.pagination__button
+        {:disabled (= 0 page)
+        :title "First page"}
+        [fa "angle-double-left"]]
       (map-indexed (fn [idx n] (with-meta [page-button n] {:key idx})) (filter identity pages))
-      [:button.pagination__button {:disabled (= page last-page)} [fa "angle-double-right"]]]))
+      [:button.pagination__button
+        {:disabled (= page last-page)
+         :title "Last page"}
+         [fa "angle-double-right"]]]))
 
 (defn search-form
   "Search form component."
@@ -288,7 +296,8 @@
            :placeholder "Search..."
            :on-change #(reset! query (-> % .-target .-value))}]
         [:button.search-form__button
-          {:type "submit"}
+          {:type "submit"
+           :title "Search"}
           [fa "search"]]])))
 
 (defn error
