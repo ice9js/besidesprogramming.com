@@ -5,6 +5,7 @@
             [andromeda.subs]
             [andromeda.routes]
             [andromeda.components :as components]
+            [andromeda.worker]
             [andromeda.views :as views]))
 
 (defmulti sites identity)
