@@ -308,10 +308,11 @@
   [code]
   (let [header (case code
                      404 "Oops! This page does not exist."
-                     503 "Sorry :( \nThe service is unavailable."
+                     503 "Oh no! \nThe service seems to be offline."
                      "Yikes! That didn't work.")
         message (case code
-                      503 "This message might've been caused by a poor connection. \nEnsure you're connected to the internet and check back later."
+                      503 (str "Fortunately, it's likely that at least some of this site's content is available to you, even offline.\n"
+                               "Feel free to look around and check back here once you're connected again.")
                       nil)]
     [:div.error
       [:div.error__header header]
