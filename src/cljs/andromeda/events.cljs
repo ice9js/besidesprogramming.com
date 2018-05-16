@@ -48,7 +48,7 @@
                   :params query
                   :timeout 3000
                   :response-format json-format
-                  :on-success [:query-posts-success]
+                  :on-success [:query-posts-success query]
                   :on-failure [:query-posts-failure]}
 
      :db (-> (:db ctx)
@@ -58,9 +58,13 @@
 
 (rf/reg-event-fx
   :query-posts-success
-  (fn [ctx [_ response]]
-    (let [results (mapv post-from-api (:body response))]
+  (fn [ctx [_ query response]]
+    (let [results (mapv post-from-api (:body response))
+          not-found? (and (:slug query)
+                          (= (count results) 0)
+                          404)]
       {:db (-> (:db ctx)
+               (assoc-in [:posts :error] not-found?)
                (assoc-in [:posts :items] results)
                (assoc-in [:posts :total] (js/parseInt (:x-wp-total (:headers response))))
                (assoc-in [:posts :loading] false))})))
