@@ -9,6 +9,7 @@ const opts = {
 	prefillAssets: [
 			'/',
 			'/css/screen.css',
+			'/img/besidesprogramming-logo.svg',
 			'/js/app.js',
 			'/browserconfig.xml',
 			'/manifest.json'

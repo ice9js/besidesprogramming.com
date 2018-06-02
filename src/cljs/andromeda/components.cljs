@@ -31,8 +31,7 @@
   []
   [:a.logo
    {:href "/"}
-   [:span.sr-only "Besides Programming - Home"]
-   [:div.logo__img]])
+   [:img.logo__img {:src "/img/besidesprogramming-logo.svg" :alt "Besides Programming - Home"}]])
 
 (defn social-button
   "Social media links."
