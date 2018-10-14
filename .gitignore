@@ -2,3 +2,5 @@
 /out
 /.nrepl-port
 /.nrepl-history
+
+/node_modules

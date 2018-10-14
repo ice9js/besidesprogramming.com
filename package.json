@@ -1,0 +1,49 @@
+{
+  "name": "besidesprogramming.com",
+  "version": "1.0.0",
+  "description": "Client application for besidesprogramming.com",
+  "main": "index.js",
+  "dependencies": {
+    "babel-loader": "7"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.6",
+    "@fortawesome/free-brands-svg-icons": "^5.4.1",
+    "@fortawesome/free-solid-svg-icons": "^5.4.1",
+    "@fortawesome/react-fontawesome": "^0.1.3",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.1",
+    "redux-form": "^7.4.2",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "3.11.0",
+    "webpack-dev-server": "2.11.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --history-api-fallback --inline --progress",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ice9js/besidesprogramming.com.git"
+  },
+  "author": "Kuba Birecki <kuba.birecki@besidesprogramming.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ice9js/besidesprogramming.com/issues"
+  },
+  "homepage": "https://besidesprogramming.com"
+}
