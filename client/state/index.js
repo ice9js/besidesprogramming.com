@@ -8,8 +8,6 @@ import { createStore, applyMiddleware } from 'redux';
  */
 import rootReducer from './reducer.js';
 
-console.log( rootReducer );
-
 const store = createStore(
 	rootReducer,
 );
