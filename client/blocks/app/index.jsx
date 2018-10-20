@@ -26,7 +26,7 @@ const App = () => (
 				<Route path="/photos" exact component={ Home } />
 				<Route path="/search" exact component={ Home } />
 				<Route path="/archive" exact component={ Home } />
-				<Route path="/" component={ Post } />
+				<Route path="/:slug" component={ Post } />
 			</Switch>
 		</div>
 	</div>
