@@ -8,6 +8,7 @@ import { isEqual } from 'lodash';
  * Internal dependencies
  */
 import { fetchPosts } from 'data/posts';
+import { fromApi } from 'data/posts/utils';
 
 class WithPosts extends Component {
 
@@ -37,7 +38,7 @@ class WithPosts extends Component {
 			this.props.query,
 			( response ) => this.setState( {
 				isLoading: false,
-				posts: response.data,
+				posts: fromApi( response.data ),
 				status: response.status,
 				total: response.headers.get( 'x-wp-total' ),
 			} ),

@@ -5,12 +5,12 @@ import React from 'react';
 import { concat } from 'lodash';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import {
 	faFacebookF,
 	faInstagram,
-	faTwitter,
+	faPinterest,
 	faSlackHash,
+	faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import {
 	faBars,
@@ -19,10 +19,12 @@ import {
 	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
+// Add chosen icons to the library
 library.add(
 	faBars,
 	faFacebookF,
 	faInstagram,
+	faPinterest,
 	faRss,
 	faSearch,
 	faTimes,

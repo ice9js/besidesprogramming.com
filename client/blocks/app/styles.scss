@@ -12,3 +12,15 @@
 		padding: 50px 25px 25px 325px;
 	}
 }
+
+.app__content {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	@media #{$desktop} {
+		margin: 0 auto;
+		max-width: 800px;
+		padding: 20px 0 0;
+	}
+}
