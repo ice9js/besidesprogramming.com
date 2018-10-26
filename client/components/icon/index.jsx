@@ -13,6 +13,7 @@ import {
 	faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import {
+	faAngleDoubleRight,
 	faBars,
 	faRss,
 	faSearch,
@@ -21,6 +22,7 @@ import {
 
 // Add chosen icons to the library
 library.add(
+	faAngleDoubleRight,
 	faBars,
 	faFacebookF,
 	faInstagram,

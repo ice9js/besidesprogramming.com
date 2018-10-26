@@ -1,0 +1,34 @@
+.post-excerpt {
+	margin: 0 0 40px;
+}
+
+.post-excerpt__actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	margin: 20px 0 0;
+	padding: 0 25px;
+	width: 100%;
+
+	@media #{$tablet-wide} {
+		padding: 0;
+	}
+}
+
+.post-excerpt__read-more {
+	background-color: transparent;
+	color: $medium-grey;
+	font-size: 22px;
+	font-weight: bold;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+
+	@media #{$tablet} {
+		flex: .5;
+	}
+}
+
+.post-excerpt__read-more-icon {
+	margin: 0 10px;
+}
