@@ -16,28 +16,24 @@ import PostHeader from 'components/post-header';
 import PostPlaceholder from 'components/post-placeholder';
 import WithPosts from 'components/data/with-posts';
 
-const Post = ( { isLoading, post, status } ) => {
-	if ( isLoading ) {
-		return <PostPlaceholder />;
-	}
+const Post = ( { post } ) => (
+	<React.Fragment>
+		<PageMeta title={ `${ post.title } - Besides Programming`  } />
+		<PostHeader { ...post } />
+		<PostContent content={ post.content } />
+		<PostFooter { ...post } />
+		<DisqusThread id={ post.id } title={ post.title } url={ post.link } />
+	</React.Fragment>
+);
 
-	if ( status !== 200 || ! post ) {
-		return (
-			<div>
-				<PageMeta title="Post doesn't exist - Besides Programming" />
-				<ErrorCode code={ status !== 200 ? status : 404 } />
-			</div>
-		);
-	}
+const ErrorView = ( { status } ) => {
+	const message = status === 404 ? `Post doesn't exist` : 'Something went wrong';
 
 	return (
-		<div>
-			<PageMeta title={ `${ post.title } - Besides Programming`  } />
-			<PostHeader { ...post } />
-			<PostContent content={ post.content } />
-			<PostFooter { ...post } />
-			<DisqusThread id={ post.id } title={ post.title } url={ post.link } />
-		</div>
+		<React.Fragment>
+			<PageMeta title={ `${ message } - Besides Programming` } />
+			<ErrorCode code={ status } />
+		</React.Fragment>
 	);
 };
 
@@ -50,12 +46,20 @@ const PostView = ( { match } ) => {
 
 	return (
 		<WithPosts query={ postQuery }>
-			{ ( { isLoading, posts, status } ) => (
-				<Post
-					isLoading={ isLoading }
-					post={ first( posts ) }
-					status={ status } />
-			) }
+			{ ( { isLoading, posts, status } ) => {
+				if ( isLoading ) {
+					return <PostPlaceholder />;
+				}
+
+				return (
+					<React.Fragment>
+						{ status !== 200 && <ErrorView status={ status } /> }
+						{ status === 200 && posts.length === 0 && <ErrorView status={ 404 } /> }
+
+						{ status === 200 && !! posts.length && <Post post={ first( posts ) } /> }
+					</React.Fragment>
+				);
+			} }
 		</WithPosts>
 	);
 };

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React, { Component } from 'react';
-import { isEqual } from 'lodash';
+import { isEqual, pick } from 'lodash';
 
 /**
  * Internal dependencies
@@ -15,6 +15,7 @@ class WithPosts extends Component {
 	state = {
 		isLoading: false,
 		posts: [],
+		ready: false,
 		status: null,
 		total: null,
 	};
@@ -32,7 +33,7 @@ class WithPosts extends Component {
 	}
 
 	fetchPosts() {
-		this.setState( { isLoading: true } );
+		this.setState( { isLoading: true, ready: true } );
 
 		fetchPosts(
 			this.props.query,
@@ -50,7 +51,11 @@ class WithPosts extends Component {
 	}
 
 	render() {
-		return this.props.children( { ...this.state } );
+		if ( ! this.state.ready ) {
+			return null;
+		}
+
+		return this.props.children( pick( this.state, [ 'isLoading', 'posts', 'status', 'total' ] ) );
 	}
 }
 
