@@ -8,6 +8,7 @@ import { first } from 'lodash';
  * Internal dependencies
  */
 import DisqusThread from 'components/disqus-thread';
+import ErrorCode from 'components/error-code';
 import PageMeta from 'components/page-meta';
 import PostContent from 'components/post-content';
 import PostFooter from 'components/post-footer';
@@ -24,7 +25,7 @@ const Post = ( { isLoading, post, status } ) => {
 		return (
 			<div>
 				<PageMeta title="Post doesn't exist - Besides Programming" />
-				<div>{ `Error ${ status !== 200 ? status : 404 }` }</div>
+				<ErrorCode code={ status !== 200 ? status : 404 } />
 			</div>
 		);
 	}
