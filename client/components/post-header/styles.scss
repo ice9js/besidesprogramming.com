@@ -1,0 +1,44 @@
+.post-header {
+	display: flex;
+	flex-direction: column;
+	margin: 0 0 20px;
+	padding: 0 25px;
+	width: 100%;
+
+	@media #{$tablet-wide} {
+		padding: 0;
+	}
+}
+
+.post-header__title {
+	color: $text-headers;
+	font-family: $headers;
+	font-size: 45px;
+	font-weight: bold;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.post-header__link {
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	text-decoration: none;
+}
+
+.post-header__meta {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.post-header__date {
+	color: $medium-grey;
+	font-family: $headers;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 18px;
+	margin: 0 0 0 10px;
+	text-transform: uppercase;
+}

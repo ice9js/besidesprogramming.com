@@ -7,19 +7,36 @@ import { first } from 'lodash';
 /**
  * Internal dependencies
  */
+import DisqusThread from 'components/disqus-thread';
+import PageMeta from 'components/page-meta';
+import PostContent from 'components/post-content';
+import PostFooter from 'components/post-footer';
+import PostHeader from 'components/post-header';
+import PostPlaceholder from 'components/post-placeholder';
 import WithPosts from 'components/data/with-posts';
 
 const Post = ( { isLoading, post, status } ) => {
 	if ( isLoading ) {
-		return ( <div>{ `Loading` }</div> );
+		return <PostPlaceholder />;
 	}
 
 	if ( status !== 200 || ! post ) {
-		return ( <div>{ `Error ${ status !== 200 ? status : 404 }` }</div> );
+		return (
+			<div>
+				<PageMeta title="Post doesn't exist - Besides Programming" />
+				<div>{ `Error ${ status !== 200 ? status : 404 }` }</div>
+			</div>
+		);
 	}
 
 	return (
-		<div>{ `Post: ${ post.title.rendered }` }</div>
+		<div>
+			<PageMeta title={ `${ post.title } - Besides Programming`  } />
+			<PostHeader { ...post } />
+			<PostContent content={ post.content } />
+			<PostFooter { ...post } />
+			<DisqusThread id={ post.id } title={ post.title } url={ post.link } />
+		</div>
 	);
 };
 
