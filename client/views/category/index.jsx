@@ -10,10 +10,6 @@ import PageHeader from 'components/page-header';
 import PageMeta from 'components/page-meta';
 import PostsFeed from 'components/posts-feed';
 
-const query = {
-	per_page: 10,
-};
-
 const categories = {
 	photos: {
 		id: 5,
