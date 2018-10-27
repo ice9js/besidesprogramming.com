@@ -12,6 +12,7 @@ import { thru } from 'lodash';
  */
 import MobileNavigation from 'components/navigation/mobile';
 import Navigation from 'components/navigation';
+import Category from 'views/category';
 import Home from 'views/home';
 import Post from 'views/post';
 import { getLink, isLocalLink } from './utils';
@@ -50,10 +51,7 @@ class App extends PureComponent {
 				<div className="app__content">
 					<Switch>
 						<Route path="/" exact component={ Home } />
-						<Route path="/thoughts" exact component={ Home } />
-						<Route path="/programming" exact component={ Home } />
-						<Route path="/travel" exact component={ Home } />
-						<Route path="/photos" exact component={ Home } />
+						<Route path="/:category(thoughts|programming|travel|photos)" exact component={ Category } />
 						<Route path="/search" exact component={ Home } />
 						<Route path="/archive" exact component={ Home } />
 						<Route path="/:slug" component={ Post } />
