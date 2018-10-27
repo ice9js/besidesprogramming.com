@@ -1,6 +1,7 @@
 @import "./config.scss";
 @import "./shared.scss";
 
+@import "components/app/styles.scss";
 @import "components/error-code/styles.scss";
 @import "components/navigation/styles.scss";
 @import "components/post-content/styles.scss";
@@ -10,5 +11,3 @@
 @import "components/post-placeholder/styles.scss";
 @import "components/share-button/styles.scss";
 @import "components/social-button/styles.scss";
-
-@import "blocks/app/styles.scss";

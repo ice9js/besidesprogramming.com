@@ -9,14 +9,12 @@ import { render } from 'react-dom';
 /**
  * Internal dependencies
  */
-import App from 'blocks/app';
+import App from 'components/app';
 import store from 'state';
 
 render(
 	<BrowserRouter>
-		<Provider store={ store }>
-			<App />
-		</Provider>
+		<App />
 	</BrowserRouter>,
 	document.getElementById( 'app' )
 );
