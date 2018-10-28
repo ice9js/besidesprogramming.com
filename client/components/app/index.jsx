@@ -16,6 +16,7 @@ import Home from 'views/home';
 import MobileNavigation from 'components/navigation/mobile';
 import Navigation from 'components/navigation';
 import Post from 'views/post';
+import Search from 'views/search';
 import { getLink, isLocalLink } from './utils';
 
 class App extends PureComponent {
@@ -54,7 +55,7 @@ class App extends PureComponent {
 						<Route path="/" exact component={ Home } />
 						<Route path="/:category(thoughts|programming|travel|photos)/:page(\d+)?" exact component={ Category } />
 						<Route path="/all/:page(\d+)?" exact component={ Archive } />
-						<Route path="/search" exact component={ Home } />
+						<Route path="/search" exact component={ Search } />
 						<Route path="/:slug" component={ Post } />
 					</Switch>
 				</div>
