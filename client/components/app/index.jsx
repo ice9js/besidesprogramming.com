@@ -50,7 +50,7 @@ class App extends PureComponent {
 				<Navigation />
 				<MobileNavigation />
 
-				<div className="app__content">
+				<main className="app__content">
 					<Switch>
 						<Route path="/" exact component={ Home } />
 						<Route path="/:category(thoughts|programming|travel|photos)/:page(\d+)?" exact component={ Category } />
@@ -58,7 +58,7 @@ class App extends PureComponent {
 						<Route path="/search" exact component={ Search } />
 						<Route path="/:slug" component={ Post } />
 					</Switch>
-				</div>
+				</main>
 			</div>
 		);
 	}
