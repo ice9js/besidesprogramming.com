@@ -12,7 +12,7 @@ import Pagination from 'components/pagination';
 import PostsFeed from 'components/posts-feed';
 import ErrorView from 'views/error';
 
-const getArchiveUrl = ( n ) => `/archive/${ n }`;
+const getArchiveUrl = ( n ) => `/all/${ n }`;
 
 const postsPerPage = 10;
 

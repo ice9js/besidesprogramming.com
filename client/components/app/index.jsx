@@ -52,9 +52,9 @@ class App extends PureComponent {
 				<div className="app__content">
 					<Switch>
 						<Route path="/" exact component={ Home } />
-						<Route path="/:category(thoughts|programming|travel|photos)" exact component={ Category } />
+						<Route path="/:category(thoughts|programming|travel|photos)/:page(\d+)?" exact component={ Category } />
+						<Route path="/all/:page(\d+)?" exact component={ Archive } />
 						<Route path="/search" exact component={ Home } />
-						<Route path="/archive/:page(\d+)?" exact component={ Archive } />
 						<Route path="/:slug" component={ Post } />
 					</Switch>
 				</div>
