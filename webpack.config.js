@@ -9,6 +9,7 @@ var BUILD_DIR = path.resolve( __dirname, 'build' );
 
 var isProd = process.argv.indexOf( '-p' ) !== -1;
 var shouldMinify = isProd;
+var settingsFile = isProd ? 'production.js' : 'development.js';
 
 var extractTextPlugin = new ExtractTextPlugin( 'css/styles.min.css' );
 
@@ -45,7 +46,10 @@ var config = {
 	},
 	resolve: {
 		extensions: [ '.json', '.js', '.jsx' ],
-		modules: [ APP_DIR, ASSETS_DIR, path.resolve( __dirname, 'node_modules' ) ]
+		modules: [ APP_DIR, ASSETS_DIR, path.resolve( __dirname, 'node_modules' ) ],
+		alias: {
+			'app-settings': path.resolve( __dirname, 'config',  settingsFile )
+		},
 	},
 	plugins: [
 		extractTextPlugin,

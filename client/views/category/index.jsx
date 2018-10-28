@@ -11,29 +11,12 @@ import PageMeta from 'components/page-meta';
 import Pagination from 'components/pagination';
 import PostsFeed from 'components/posts-feed';
 import ErrorView from 'views/error';
+import { config } from 'config';
 
-const categories = {
-	photos: {
-		id: 5,
-		label: 'Photos',
-	},
-	programming: {
-		id: 3,
-		label: 'Programming',
-	},
-	thoughts: {
-		id: 2,
-		label: 'Thoughts',
-	},
-	travel: {
-		id: 4,
-		label: 'Travel',
-	},
-};
+const categories = config( 'posts.categories' );
+const postsPerPage = config( 'posts.perPage' );
 
 const getCategoryUrl = ( category ) => ( n ) => `/${ category }/${ n }`;
-
-const postsPerPage = 10;
 
 const Category = ( { match } ) => {
 	const page = ( match.params.page && parseInt( match.params.page ) ) || 1;
@@ -46,7 +29,7 @@ const Category = ( { match } ) => {
 
 	return (
 		<React.Fragment>
-			<PageMeta title={ `${ category.label } - Page ${ page } - Besides Programming` } />
+			<PageMeta title={ `${ category.label } - Page ${ page } - ${ config( 'app.name' ) }` } />
 			<PageHeader text={ category.label } />
 			<PostsFeed query={ query }>
 				{ ( { isLoading, status, total } ) => {

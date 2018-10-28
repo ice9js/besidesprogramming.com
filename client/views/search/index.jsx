@@ -13,11 +13,12 @@ import Pagination from 'components/pagination';
 import PostsFeed from 'components/posts-feed';
 import SearchForm from 'components/search-form';
 import ErrorView from 'views/error';
+import { config } from 'config';
 import { parseQuery } from 'lib/url';
 
-const getSearchUrl = ( search ) => ( n ) => `/search?q=${ encodeURIComponent( search ) }&p=${ n }`;
+const postsPerPage = config( 'posts.perPage' );
 
-const postsPerPage = 10;
+const getSearchUrl = ( search ) => ( n ) => `/search?q=${ encodeURIComponent( search ) }&p=${ n }`;
 
 const Search = ( { location, match } ) => {
 	const values = parseQuery( location.search );
@@ -33,7 +34,7 @@ const Search = ( { location, match } ) => {
 
 	return (
 		<React.Fragment>
-			<PageMeta title={ `${ title } - Besides Programming` } />
+			<PageMeta title={ `${ title } - ${ config( 'app.name' ) }` } />
 			<PageHeader text="Search" />
 			<SearchForm query={ search } />
 			{ search && (

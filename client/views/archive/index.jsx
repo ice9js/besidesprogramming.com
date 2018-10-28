@@ -11,10 +11,11 @@ import PageMeta from 'components/page-meta';
 import Pagination from 'components/pagination';
 import PostsFeed from 'components/posts-feed';
 import ErrorView from 'views/error';
+import { config } from 'config';
+
+const postsPerPage = config( 'posts.perPage' );
 
 const getArchiveUrl = ( n ) => `/all/${ n }`;
-
-const postsPerPage = 10;
 
 const Archive = ( { match } ) => {
 	const page = ( match.params.page && parseInt( match.params.page ) ) || 1;
@@ -25,7 +26,7 @@ const Archive = ( { match } ) => {
 
 	return (
 		<React.Fragment>
-			<PageMeta title={ `Archive - Page ${ page } - Besides Programming` } />
+			<PageMeta title={ `Archive - Page ${ page } - ${ config( 'app.name' ) }` } />
 			<PageHeader text="Archive" />
 			<PostsFeed query={ query }>
 				{ ( { isLoading, status, total } ) => {

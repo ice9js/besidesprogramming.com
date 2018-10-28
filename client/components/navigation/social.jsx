@@ -8,34 +8,9 @@ import { map } from 'lodash';
  * Internal dependencies
  */
 import SocialButton from 'components/social-button';
+import { config } from 'config';
 
-const socialLinks = [
-	{
-		icon: 'rss',
-		title: 'RSS Feed',
-		url: 'https://besidesprogramming.com/feed/',
-	},
-	{
-		icon: ['fab', 'slack-hash'],
-		title: 'Slack',
-		url: 'https://slackin.besidesprogramming.com/',
-	},
-	{
-		icon: ['fab', 'instagram'],
-		title: 'Instagram',
-		url: 'https://www.instagram.com/ice9js/',
-	},
-	{
-		icon: ['fab', 'twitter'],
-		title: 'Twitter',
-		url: 'https://twitter.com/ice9js',
-	},
-	{
-		icon: ['fab', 'facebook-f'],
-		title: 'Facebook',
-		url: 'https://www.facebook.com/besidesprogramming/',
-	},
-];
+const socialLinks = config( 'socialLinks' );
 
 const Social = () => (
 	<ul className="navigation__social">

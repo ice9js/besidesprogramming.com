@@ -5,7 +5,12 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { tap } from 'lodash';
 
-const disqus_shortname = 'besidesprogramming';
+/**
+ * Internal dependencies
+ */
+import { config } from 'config';
+
+const disqusShortname = config( 'app.disqusShortname' );
 
 class DisqusThread extends PureComponent {
 
@@ -37,7 +42,7 @@ class DisqusThread extends PureComponent {
 				document.createElement( 'script' ),
 				( disqus ) => {
 					disqus.setAttribute( 'async', true );
-					disqus.setAttribute( 'src', `//${ disqus_shortname }.disqus.com/embed.js` );
+					disqus.setAttribute( 'src', `//${ disqusShortname }.disqus.com/embed.js` );
 				}
 			) );
 		}
@@ -46,7 +51,7 @@ class DisqusThread extends PureComponent {
 	}
 
 	render() {
-		window.disqus_shortname = disqus_shortname;
+		window.disqus_shortname = disqusShortname;
 		window.disqus_identifier = this.props.id;
 		window.disqus_title = this.props.title;
 		window.disqus_url = this.props.url;

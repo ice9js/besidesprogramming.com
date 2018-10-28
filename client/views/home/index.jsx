@@ -9,8 +9,9 @@ import React from 'react';
 import Button from 'components/button';
 import PageMeta from 'components/page-meta';
 import PostsFeed from 'components/posts-feed';
+import { config } from 'config';
 
-const postsPerPage = 10;
+const postsPerPage = config( 'posts.perPage' );
 
 const query = {
 	per_page: postsPerPage,
@@ -18,7 +19,7 @@ const query = {
 
 const Home = () => (
 	<React.Fragment>
-		<PageMeta title={ 'Home - Besides Programming' } />
+		<PageMeta title={ `Home - ${ config( 'app.name' ) }` } />
 		<PostsFeed query={ query }>
 			{ ( { isLoading, total } ) => (
 				! isLoading && postsPerPage < total && (

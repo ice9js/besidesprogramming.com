@@ -3,7 +3,12 @@
  */
 import { join, map } from 'lodash';
 
-const apiHost = 'https://besidesprogramming.com/wp-json/wp/v2';
+/**
+ * Internal dependencies
+ */
+import { config } from 'config';
+
+const apiHost = config( 'api.host' );
 
 /**
  * Converts an object to url query string
