@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { get } from 'lodash';
 
 /**
@@ -9,18 +10,18 @@ import { get } from 'lodash';
  */
 import PageHeader from 'components/page-header';
 import PageMeta from 'components/page-meta';
-import Pagination from 'components/pagination';
 import PostsFeed from 'components/posts-feed';
 import SearchForm from 'components/search-form';
-import ErrorView from 'views/error';
+import QueryPosts from 'components/data/query-posts';
 import { config } from 'config';
 import { parseQuery } from 'lib/url';
+import { getAllPosts, getPostsError, getPostsLoadingStatus, getPostsTotal, getPostsTotalPages } from 'state/posts/selectors';
 
 const postsPerPage = config( 'posts.perPage' );
 
-const getSearchUrl = ( search ) => ( n ) => `/search?q=${ encodeURIComponent( search ) }&p=${ n }`;
+const searchUrl = ( search ) => `/search?q=${ encodeURIComponent( search ) }&p={{pageNumber}}`;
 
-const Search = ( { location, match } ) => {
+const Search = ( { location, match, ...props } ) => {
 	const values = parseQuery( location.search );
 	const search = values.q || '';
 	const page = parseInt( values.p ) || 1;
@@ -37,26 +38,26 @@ const Search = ( { location, match } ) => {
 			<PageMeta title={ `${ title } - ${ config( 'app.name' ) }` } />
 			<PageHeader text="Search" />
 			<SearchForm query={ search } />
+
 			{ search && (
-				<PostsFeed query={ query }>
-					{ ( { isLoading, status, total } ) => {
-						const pages = Math.ceil( total / postsPerPage );
-						const urlFormat = getSearchUrl( search );
-
-						if ( isLoading || total == 0 ) {
-							return null;
-						}
-
-						if ( status !== 200 ) {
-							return <ErrorView status={ status } />
-						}
-
-						return <Pagination currentPage={ page } pages={ pages } urlFormat={ urlFormat } />;
-					} }
-				</PostsFeed>
+				<React.Fragment>
+					<QueryPosts query={ query } />
+					<PostsFeed
+						currentPage={ page }
+						paginationBase={ searchUrl( search ) }
+						{ ...props } />
+				</React.Fragment>
 			) }
 		</React.Fragment>
 	);
 };
 
-export default Search;
+export default connect(
+	( state ) => ( {
+		error: getPostsError( state ),
+		loading: getPostsLoadingStatus( state ),
+		posts: getAllPosts( state ),
+		total: getPostsTotal( state ),
+		totalPages: getPostsTotalPages( state ),
+	} )
+)( Search );

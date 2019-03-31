@@ -9,28 +9,33 @@ import { map, times } from 'lodash';
  * Internal dependencies
  */
 import ErrorCode from 'components/error-code';
+import Pagination from 'components/pagination';
 import PostExcerpt from 'components/post-excerpt';
 import PostPlaceholder from 'components/post-placeholder';
-import WithPosts from 'components/data/with-posts';
+import ErrorView from 'views/error';
 
-const PostsFeed = ( { children, query } ) => (
-	<WithPosts query={ query }>
-		{ ( { isLoading, posts, status, total } ) => {
-			if ( isLoading ) {
-				return times( 3, ( n ) => <PostPlaceholder key={ n } /> );
-			}
+const PostsFeed = ( { currentPage, error, loading, paginationBase, posts, total, totalPages } ) => {
+	if ( loading ) {
+		return times( 3, ( n ) => <PostPlaceholder key={ n } /> );
+	}
 
-			return (
-				<React.Fragment>
-					{ status !== 200 && <ErrorCode code={ status } /> }
-					{ status === 200 && map( posts, ( post ) => <PostExcerpt key={ post.slug } post={ post } /> ) }
+	if ( error ) {
+		return <ErrorView status={ error } />;
+	}
 
-					{ children && children( { isLoading, posts, status, total } ) }
-				</React.Fragment>
-			);
-		} }
-	</WithPosts>
-);
+	return (
+		<React.Fragment>
+			{ map( posts, ( post ) => <PostExcerpt key={ post.slug } post={ post } /> ) }
+
+			{ paginationBase && total !== 0 && (
+				<Pagination
+					currentPage={ currentPage }
+					pages={ totalPages }
+					paginationBase={ paginationBase } />
+			) }
+		</React.Fragment>
+	);
+};
 
 PostsFeed.propTypes = {
 	query: PropTypes.object,

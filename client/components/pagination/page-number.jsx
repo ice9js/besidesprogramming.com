@@ -5,11 +5,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const PageNumber = ( { active, className, page, urlFormat } ) => {
+/**
+ * Internal dependencies
+ */
+import { formatPageUrl } from './utils';
+
+const PageNumber = ( { active, className, page, paginationBase } ) => {
 	const buttonClass = classNames( 'pagination__page-number', { 'is-active': active }, className );
 
 	return (
-		<a className={ buttonClass } href={ urlFormat( page ) }>
+		<a className={ buttonClass } href={ formatPageUrl( paginationBase, page ) }>
 			<span className="sr-only">Page</span>
 			{ page }
 		</a>
@@ -19,7 +24,7 @@ const PageNumber = ( { active, className, page, urlFormat } ) => {
 PageNumber.propTypes = {
 	active: PropTypes.bool,
 	page: PropTypes.number.isRequired,
-	urlFormat: PropTypes.func.isRequired,
+	paginationBase: PropTypes.string.isRequired,
 };
 
 export default PageNumber;

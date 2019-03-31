@@ -2,6 +2,7 @@
  * Production app settings
  */
 const settings = {
+	env: 'production',
 	app: {
 		name: 'Besides Programming',
 		host: 'https://besidesprogramming.com',
