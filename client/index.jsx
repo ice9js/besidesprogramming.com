@@ -2,17 +2,21 @@
  * External dependencies
  */
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 
 /**
  * Internal dependencies
  */
 import App from 'components/app';
+import store from 'state';
 
-render(
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>,
+hydrate(
+	<Provider store={ store }>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>,
 	document.getElementById( 'app' )
 );

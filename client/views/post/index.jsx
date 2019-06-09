@@ -2,17 +2,16 @@
  * External dependencies
  */
 import React from 'react';
-import { first } from 'lodash';
+import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
-import WithPosts from 'components/data/with-posts';
 import PostComponent from 'components/post';
-import PostPlaceholder from 'components/post-placeholder';
-import ErrorView from 'views/error';
+import QueryPosts from 'components/data/query-posts';
+import { getPostsError, getPostsLoadingStatus, getPost } from 'state/posts/selectors';
 
-const Post = ( { match } ) => {
+const Post = ( { match, ...props } ) => {
 	const postQuery = {
 		_embed: true,
 		per_page: 1,
@@ -20,23 +19,17 @@ const Post = ( { match } ) => {
 	};
 
 	return (
-		<WithPosts query={ postQuery }>
-			{ ( { isLoading, posts, status } ) => {
-				if ( isLoading ) {
-					return <PostPlaceholder />;
-				}
-
-				return (
-					<React.Fragment>
-						{ status !== 200 && <ErrorView status={ status } /> }
-						{ status === 200 && posts.length === 0 && <ErrorView status={ 404 } /> }
-
-						{ status === 200 && !! posts.length && <PostComponent post={ first( posts ) } /> }
-					</React.Fragment>
-				);
-			} }
-		</WithPosts>
+		<React.Fragment>
+			<QueryPosts query={ postQuery } />
+			<PostComponent { ...props } />
+		</React.Fragment>
 	);
 };
 
-export default Post;
+export default connect(
+	( state, { match } ) => ( {
+		error: getPostsError( state ),
+		loading: getPostsLoadingStatus( state ),
+		post: getPost( state, match.params.slug ),
+	} )
+)( Post );

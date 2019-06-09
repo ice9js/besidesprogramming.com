@@ -12,8 +12,9 @@ import Icon from 'components/icon';
 import Controls from './controls';
 import PageNumber from './page-number';
 import Placeholder from './placeholder';
+import { formatPageUrl } from './utils';
 
-const Pagination = ( { currentPage, pages, urlFormat } ) => {
+const Pagination = ( { currentPage, pages, paginationBase } ) => {
 	const currentRange = range( Math.max( 0, currentPage - 2 ), Math.min( pages, currentPage + 2 ) + 1 );
 	const totalRange = filter( flatten( [
 		3 < currentPage && 1,
@@ -28,20 +29,20 @@ const Pagination = ( { currentPage, pages, urlFormat } ) => {
 			<Controls
 				disabled={ currentPage === 1 }
 				className="pagination__button"
-				href={ urlFormat( currentPage - 1 ) }
+				href={ formatPageUrl( paginationBase, currentPage - 1 ) }
 				icon={ <Icon icon="angle-double-left" /> }
 				label="Previous page" />
 
 			{ map( totalRange, ( n, index ) => (
 				! isFinite( n )
 					? <Placeholder key={ index } />
-					: <PageNumber key={ index } className="pagination__button" active={ n === currentPage } page={ n } urlFormat={ urlFormat } />
+					: <PageNumber key={ index } className="pagination__button" active={ n === currentPage } page={ n } paginationBase={ paginationBase } />
 			) ) }
 
 			<Controls
 				disabled={ currentPage === pages }
 				className="pagination__button"
-				href={ urlFormat( currentPage + 1 ) }
+				href={ formatPageUrl( paginationBase, currentPage + 1 ) }
 				icon={ <Icon icon="angle-double-right" /> }
 				label="Next page" />
 		</div>
@@ -51,7 +52,7 @@ const Pagination = ( { currentPage, pages, urlFormat } ) => {
 Pagination.propTypes = {
 	currentPage: PropTypes.number.isRequired,
 	pages: PropTypes.number.isRequired,
-	urlFormat: PropTypes.func.isRequired,
+	paginationBase: PropTypes.string.isRequired,
 };
 
 export default Pagination;

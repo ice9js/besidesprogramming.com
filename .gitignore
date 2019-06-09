@@ -3,4 +3,9 @@
 /.nrepl-port
 /.nrepl-history
 
+/build
 /node_modules
+/public/app.js
+/public/styles-debug.css
+/public/styles-debug.css.map
+/public/styles.min.css

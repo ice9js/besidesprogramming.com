@@ -2,8 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { concat } from 'lodash';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { dom, library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faFacebookF,
@@ -37,6 +36,8 @@ library.add(
 	faTwitter,
 	faSlackHash
 );
+
+export const getIconsCss = dom.css;
 
 const Icon = ( props ) => <FontAwesomeIcon { ...props } />;
 

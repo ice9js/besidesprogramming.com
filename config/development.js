@@ -2,9 +2,11 @@
  * Development app settings
  */
 const settings = {
+	env: 'development',
 	app: {
 		name: 'Besides Programming',
-		host: 'http://besidesprogramming.localhost',
+		host: 'besidesprogramming.localhost',
+		port: 3000,
 		gaTrackerId: 'UA-88781129-1',
 		disqusShortname: 'besidesprogramming-dev',
 	},

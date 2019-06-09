@@ -42,7 +42,10 @@
 
 .navigation__logo {
 	display: block;
-	margin-bottom: 50px;
+
+	.navigation:not(.is-mobile) & {
+		margin-bottom: 50px;
+	}
 }
 
 .navigation__toggle {
@@ -136,7 +139,9 @@
 	margin: 0 0 0 15px;
 
 	@media #{$desktop} {
-		display: none;
+		&.svg-inline--fa {
+			display: none;
+		}
 	}
 }
 

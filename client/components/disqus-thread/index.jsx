@@ -37,6 +37,10 @@ class DisqusThread extends PureComponent {
 	}
 
 	loadDisqus() {
+		if ( typeof window === 'undefined' ) {
+			return;
+		}
+
 		if ( ! window.DISQUS ) {
 			return ( document.head || document.body ).appendChild( tap(
 				document.createElement( 'script' ),
@@ -51,10 +55,12 @@ class DisqusThread extends PureComponent {
 	}
 
 	render() {
-		window.disqus_shortname = disqusShortname;
-		window.disqus_identifier = this.props.id;
-		window.disqus_title = this.props.title;
-		window.disqus_url = this.props.url;
+		if ( typeof window !== 'undefined' ) {
+			window.disqus_shortname = disqusShortname;
+			window.disqus_identifier = this.props.id;
+			window.disqus_title = this.props.title;
+			window.disqus_url = this.props.url;
+		}
 
 		return <div id="disqus_thread" className="disqus-thread"></div>;
 	}
