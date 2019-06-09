@@ -3,13 +3,15 @@
  */
 import React from 'react';
 
-const Document = ( { children, preloadedState } ) => (
+const Document = ( { appHTML, head, preloadedState } ) => (
 	<html lang="en">
 		<head>
+			{ head.title.toComponent() }
+
 			<meta charSet="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<meta name="description" content="" />
-			<title>Besides Programming</title>
+
 			<link href="/andromeda/styles.min.css" rel="stylesheet" type="text/css" media="screen" />
 
 			<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet" />
@@ -37,9 +39,10 @@ const Document = ( { children, preloadedState } ) => (
 			<meta name="theme-color" content="#ffffff" />
 		</head>
 		<body>
-			<div id="app" data-preloaded-state={ JSON.stringify( preloadedState ) }>
-				{ children }
-			</div>
+			<div
+				id="app"
+				data-preloaded-state={ JSON.stringify( preloadedState ) }
+				dangerouslySetInnerHTML={ appHTML } />
 			<script type="text/javascript" src="andromeda/app.js"></script>
 		</body>
 	</html>

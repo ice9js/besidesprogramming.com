@@ -2,13 +2,13 @@
  * External dependencies
  */
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
 import PageHeader from 'components/page-header';
-import PageMeta from 'components/page-meta';
 import PostsFeed from 'components/posts-feed';
 import QueryPosts from 'components/data/query-posts';
 import { config } from 'config';
@@ -25,7 +25,10 @@ const Archive = ( { match, ...props } ) => {
 
 	return (
 		<React.Fragment>
-			<PageMeta title={ `Archive - Page ${ page } - ${ config( 'app.name' ) }` } />
+			<Helmet>
+				<title>{ `Archive - Page ${ page } - ${ config( 'app.name' ) }` }</title>
+			</Helmet>
+
 			<PageHeader text="Archive" />
 
 			<QueryPosts query={ query } />

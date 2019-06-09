@@ -2,12 +2,12 @@
  * External dependencies
  */
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
-import PageMeta from 'components/page-meta';
 import PostsFeed from 'components/posts-feed';
 import QueryPosts from 'components/data/query-posts';
 import { config } from 'config';
@@ -21,7 +21,9 @@ const query = {
 
 const Home = ( props ) => (
 	<React.Fragment>
-		<PageMeta title={ `Home - ${ config( 'app.name' ) }` } />
+		<Helmet>
+			<title>{ `Home - ${ config( 'app.name' ) }` }</title>
+		</Helmet>
 
 		<QueryPosts query={ query } />
 		<PostsFeed { ...props } />

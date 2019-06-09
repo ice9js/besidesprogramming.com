@@ -2,12 +2,12 @@
  * External dependencies
  */
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 /**
  * Internal dependencies
  */
 import ErrorCode from 'components/error-code';
-import PageMeta from 'components/page-meta';
 import { config } from 'config';
 
 const ErrorView = ( { status } ) => {
@@ -15,7 +15,10 @@ const ErrorView = ( { status } ) => {
 
 	return (
 		<React.Fragment>
-			<PageMeta title={ `${ message } - ${ config( 'app.name' ) }` } />
+			<Helmet>
+				<title>{ `${ message } - ${ config( 'app.name' ) }` }</title>
+			</Helmet>
+
 			<ErrorCode code={ status } />
 		</React.Fragment>
 	);

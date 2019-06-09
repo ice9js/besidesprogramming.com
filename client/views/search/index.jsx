@@ -1,7 +1,8 @@
 /**
  * External dependencies
  */
-import React, { Component } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 
@@ -9,7 +10,6 @@ import { get } from 'lodash';
  * Internal dependencies
  */
 import PageHeader from 'components/page-header';
-import PageMeta from 'components/page-meta';
 import PostsFeed from 'components/posts-feed';
 import SearchForm from 'components/search-form';
 import QueryPosts from 'components/data/query-posts';
@@ -35,7 +35,10 @@ const Search = ( { location, match, ...props } ) => {
 
 	return (
 		<React.Fragment>
-			<PageMeta title={ `${ title } - ${ config( 'app.name' ) }` } />
+			<Helmet>
+				<title>{ `${ title } - ${ config( 'app.name' ) }` }</title>
+			</Helmet>
+
 			<PageHeader text="Search" />
 			<SearchForm query={ search } />
 

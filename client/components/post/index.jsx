@@ -2,19 +2,17 @@
  * External dependencies
  */
 import React from 'react';
-import { first } from 'lodash';
+import { Helmet } from 'react-helmet';
 
 /**
  * Internal dependencies
  */
 import DisqusThread from 'components/disqus-thread';
 import ErrorView from 'views/error';
-import PageMeta from 'components/page-meta';
 import PostContent from 'components/post-content';
 import PostFooter from 'components/post-footer';
 import PostHeader from 'components/post-header';
 import PostPlaceholder from 'components/post-placeholder';
-import withPosts from 'components/data/with-posts';
 import { config } from 'config';
 
 const Post = ( { error, loading, post } ) => {
@@ -32,7 +30,10 @@ const Post = ( { error, loading, post } ) => {
 
 	return (
 		<React.Fragment>
-			<PageMeta title={ `${ post.title } - ${ config( 'app.name' ) }`  } />
+			<Helmet>
+				<title>{ `${ post.title } - ${ config( 'app.name' ) }`  }</title>
+			</Helmet>
+
 			<PostHeader { ...post } />
 			<PostContent content={ post.content } />
 			<PostFooter { ...post } />

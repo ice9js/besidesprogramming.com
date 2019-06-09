@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
@@ -17,14 +18,19 @@ import { getPendingRequests } from 'lib/http';
 import store from 'state';
 import { renderHTML } from './utils';
 
-const renderPage = ( url, preloadedState ) => renderToString(
+const renderPage = ( url ) => renderToString(
 	<Provider store={ store }>
-		<Document preloadedState={ preloadedState }>
-			<StaticRouter location={ url } context={ {} }>
-				<App />
-			</StaticRouter>
-		</Document>
+		<StaticRouter location={ url } context={ {} }>
+			<App />
+		</StaticRouter>
 	</Provider>
+);
+
+const renderDocument = ( appHTML, head, preloadedState ) => renderToString(
+	<Document
+		appHTML={ appHTML }
+		head={ head }
+		preloadedState={ preloadedState } />
 );
 
 export default ( req, res, next ) => {
@@ -36,7 +42,16 @@ export default ( req, res, next ) => {
 		getPendingRequests(),
 		( request ) => request.catch( () => Promise.resolve() )
 	) ).then( () => {
-		res.send( renderHTML( renderPage( req.url, store.getState() ) ) );
+		res.send( renderHTML(
+			renderDocument(
+				{
+					__html: renderPage( req.url )
+				},
+				Helmet.renderStatic(),
+				store.getState(),
+			)
+		) );
+
 		next();
 	} );
 };
