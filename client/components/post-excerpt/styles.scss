@@ -23,10 +23,6 @@
 	height: 40px;
 	line-height: 40px;
 	text-align: left;
-
-	@media #{$tablet} {
-		flex: .5;
-	}
 }
 
 .post-excerpt__read-more-icon {

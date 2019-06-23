@@ -1,0 +1,7 @@
+.disqus-thread {
+	margin: 0 25px;
+
+	@media #{$tablet-wide} {
+		margin: 0;
+	}
+}
