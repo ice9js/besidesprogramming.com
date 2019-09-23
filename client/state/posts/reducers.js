@@ -2,11 +2,11 @@
  * External dependencies
  */
 import { combineReducers } from 'redux';
-import { REQUEST_POSTS, REQUEST_POSTS_ERROR, UPDATE_POSTS } from 'state/action-types';
 
 /**
  * Internal dependencies
  */
+import { REQUEST_POSTS, REQUEST_POSTS_ERROR, UPDATE_POSTS } from 'state/action-types';
 import { createReducer } from 'state/utils';
 
 const error = createReducer( null, {

@@ -1,165 +1,185 @@
 .post-content > *:first-child {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 .post-content h1, .post-content h2, .post-content h3,
 .post-content h4, .post-content h5, .post-content h6,
 .post-content p, .post-content a, .post-content li,
 .post-content code, .post-content pre {
-  text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
 }
 
 .post-content h1, .post-content h2, .post-content h3,
 .post-content h4, .post-content h5, .post-content h6 {
-  box-sizing: border-box;
-  color: $text-headers;
-  font-family: $headers;
-  font-weight: bold;
-  margin: 25px 0 10px;
-  padding: 0 25px;
-  text-align: left;
+	box-sizing: border-box;
+	color: $text-headers;
+	font-family: $headers;
+	font-weight: bold;
+	margin: 25px 0 10px;
+	padding: 0 25px;
+	text-align: left;
 
-  @media #{$tablet-wide} {
-    padding: 0;
-  }
+	@media #{$tablet-wide} {
+		padding: 0;
+	}
 }
 
 .post-content h1, .post-content h2, .post-content h3 {
-  font-size: 22px;
-  line-height: 25px;
+	font-size: 22px;
+	line-height: 25px;
 
-  @media #{$tablet} {
-    font-size: 25px;
-    line-height: 28px;
-  }
+	@media #{$tablet} {
+		font-size: 25px;
+		line-height: 28px;
+	}
 
-  @media #{$desktop} {
-    font-size: 28px;
-    line-height: 32px;
-  }
+	@media #{$desktop} {
+		font-size: 28px;
+		line-height: 32px;
+	}
 }
 
 .post-content p {
-  box-sizing: border-box;
-  display: block;
-  line-height: 170%;
-  margin: 0 0 20px;
-  padding: 0 25px;
+	box-sizing: border-box;
+	display: block;
+	line-height: 170%;
+	margin: 0 0 20px;
+	padding: 0 25px;
 
-  @media #{$tablet-wide} {
-    padding: 0;
-  }
+	@media #{$tablet-wide} {
+		padding: 0;
+	}
 }
 
 .post-content pre {
-  background-color: $background-alternative;
-  border: 0;
-  border-bottom: 1px solid $light-grey;
-  border-top: 1px solid $light-grey;
-  box-sizing: border-box;
-  margin: 0 0 20px;
-  overflow-x: scroll;
-  padding: 0;
+	background-color: $background-alternative;
+	border: 0;
+	border-bottom: 1px solid $light-grey;
+	border-top: 1px solid $light-grey;
+	box-sizing: border-box;
+	margin: 0 0 20px;
+	overflow-x: scroll;
+	padding: 0;
 
-  @media #{$tablet-wide} {
-    border-radius: 3px;
-    border: 1px solid $light-grey;
-    width: 100%;
-  }
+	@media #{$tablet-wide} {
+		border-radius: 3px;
+		border: 1px solid $light-grey;
+		width: 100%;
+	}
 }
 
 .post-content code {
-  background-color: $background-alternative;
-  box-sizing: border-box;
-  font-family: $code;
-  font-size: 14px;
+	background-color: $background-alternative;
+	box-sizing: border-box;
+	font-family: $code;
+	font-size: 14px;
 }
 
 .post-content pre code {
-  display: block;
-  padding: 10px 25px;
+	display: block;
+	padding: 10px 25px;
 
-  @media #{$tablet-wide} {
-    padding: 5px 15px;
-  }
+	@media #{$tablet-wide} {
+		padding: 5px 15px;
+	}
 }
 
 .post-content p code {
-  border-radius: 3px;
-  border: 1px solid $light-grey;
-  padding: 0 4px;
-  white-space: nowrap;
+	border-radius: 3px;
+	border: 1px solid $light-grey;
+	padding: 0 4px;
+	white-space: nowrap;
 }
 
 .post-content blockquote {
-  border-left: 7px solid $dark-grey;
-  box-sizing: border-box;
-  margin: 0 0 20px 25px;
-  padding: 5px 0;
+	border-left: 7px solid $dark-grey;
+	box-sizing: border-box;
+	margin: 0 0 20px 25px;
+	padding: 5px 0;
 
-  @media #{$desktop} {
-    margin: 0 0 20px -15px;
-    padding: 5px 0;
-  }
+	@media #{$desktop} {
+		margin: 0 0 20px -15px;
+		padding: 5px 0;
+	}
 }
 
 .post-content blockquote p {
-  font-style: italic;
-  margin: 0;
-  padding: 0 25px 0 30px;
+	font-style: italic;
+	margin: 0;
+	padding: 0 25px 0 30px;
 
-  @media #{$desktop} {
-    padding: 0 0 0 15px;
-  }
+	@media #{$desktop} {
+		padding: 0 0 0 15px;
+	}
 }
 
 .post-content strong {
-  color: #444;
+	color: #444;
 }
 
 .post-content sup, .post-content sub {
-  font-size: 13px;
+	font-size: 13px;
 }
 
 .post-content a {
-  color: $links;
-}
-
-.post-content img {
-  max-width: 100%;
+	color: $links;
 }
 
 .post-content ul, .post-content ol {
-  padding: 0 0 0 25px;
+	padding: 0 0 0 25px;
 }
 
 .post-content > ul, .post-content > ol {
-  margin: 0 0 20px;
-  padding: 0 25px 0 55px;
+	margin: 0 0 20px;
+	padding: 0 25px 0 55px;
 
-  @media #{$desktop} {
-    padding: 0 25px 0 30px;
-  }
+	@media #{$desktop} {
+		padding: 0 25px 0 30px;
+	}
 }
 
 .post-content ul pre, .post-content ol pre {
-  border: 1px solid $light-grey;
-  border-radius: 3px;
+	border: 1px solid $light-grey;
+	border-radius: 3px;
 }
 
 .post-content hr {
-  border: 0;
-  border-bottom: 1px solid $medium-grey;
-  margin: 0 0 20px;
-  width: 100%;
+	border: 0;
+	border-bottom: 1px solid $medium-grey;
+	margin: 0 0 20px;
+	width: 100%;
 }
 
 .post-content .twitter-tweet {
-  box-sizing: border-box;
-  margin: 0 auto 20px !important;
-  padding: 0 25px !important;
+	box-sizing: border-box;
+	margin: 0 auto 20px !important;
+	padding: 0 25px !important;
 
-  @media #{$tablet-wide} {
-    padding: 0 !important;
-  }
+	@media #{$tablet-wide} {
+		padding: 0 !important;
+	}
+}
+
+.post-content img {
+	max-width: 100%;
+	height: auto;
+}
+
+.post-content .wp-block-image {
+	margin: 0 0 20px;
+	text-align: center;
+
+	figcaption {
+		font-size: 16px;
+		font-style: italic;
+		margin: 10px 0 0;
+
+		@media #{$tablet-wide} {
+			margin: 15px 30px 0;
+		}
+	}
+
+	@media #{$tablet-wide} {
+		margin: 30px -30px;
+	}
 }

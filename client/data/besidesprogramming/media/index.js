@@ -3,18 +3,17 @@
  */
 import { config } from 'config';
 import { http } from 'lib/http';
-import { REQUEST_POSTS } from 'state/action-types';
+import { REQUEST_POST_MEDIA } from 'state/action-types';
 import { parseResponse } from './utils';
 
 const apiHost = config( 'api.host' );
 
-const fetchPosts = ( { query } ) => http( {
+const fetchPostImages = ( { postSlug } ) => http( {
 	host: apiHost,
-	path: '/wp/v2/posts',
+	path: `/andromeda/v1/posts/${ postSlug }/images`,
 	method: 'GET',
-	params: query,
 } ).then( parseResponse );
 
 export default ( {
-	[ REQUEST_POSTS ]: fetchPosts
+	[ REQUEST_POST_MEDIA ]: fetchPostImages
 } );

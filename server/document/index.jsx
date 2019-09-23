@@ -43,7 +43,7 @@ const Document = ( { appHTML, head, preloadedState } ) => (
 				id="app"
 				data-preloaded-state={ JSON.stringify( preloadedState ) }
 				dangerouslySetInnerHTML={ appHTML } />
-			<script type="text/javascript" src="andromeda/app.js"></script>
+			<script type="text/javascript" src="/andromeda/app.js"></script>
 		</body>
 	</html>
 );

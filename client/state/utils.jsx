@@ -22,3 +22,16 @@ export const createReducer = ( initialState, handlers ) =>
 
 		return handlers[ action.type ]( maybeUseInitialState( state, initialState ), action );
 	};
+
+/**
+ * Creates a map of reducers over keyed objects
+ *
+ * @param  {string}   key
+ * @param  {Function} reducer
+ * @return {Function}
+ */
+export const keyedReducer = ( key, reducer ) =>
+	( state = {}, action ) => ( {
+		...state,
+		[ action[ key ] ]: reducer( state[ action[ key ] ], action ),
+	} );

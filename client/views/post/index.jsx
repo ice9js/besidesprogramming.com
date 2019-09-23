@@ -1,7 +1,8 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Route } from 'react-router';
 import { connect } from 'react-redux';
 
 /**
@@ -10,19 +11,27 @@ import { connect } from 'react-redux';
 import PostComponent from 'components/post';
 import QueryPosts from 'components/data/query-posts';
 import { getPostsError, getPostsLoadingStatus, getPost } from 'state/posts/selectors';
+import Gallery from './gallery';
 
-const Post = ( { match, ...props } ) => {
-	const postQuery = {
+const Post = ( { match, post, ...props } ) => {
+	const { slug } = match.params;
+
+	const query = {
 		_embed: true,
 		per_page: 1,
-		slug: match.params.slug,
+		slug,
 	};
 
 	return (
-		<React.Fragment>
-			<QueryPosts query={ postQuery } />
-			<PostComponent { ...props } />
-		</React.Fragment>
+		<Fragment>
+			<QueryPosts query={ query } />
+
+			<PostComponent post={ post } { ...props } />
+
+			<Route
+				path={ `${ match.path }/images/:imageId` }
+				render={ ( props ) => <Gallery postSlug={ slug } { ...props } /> } />
+		</Fragment>
 	);
 };
 
