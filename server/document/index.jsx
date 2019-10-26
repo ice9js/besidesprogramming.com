@@ -14,9 +14,9 @@ const Document = ( { appHTML, head, preloadedState } ) => (
 
 			<link href="/andromeda/styles.min.css" rel="stylesheet" type="text/css" media="screen" />
 
-			<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet" />
-			<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet" type="text/css" />
-			<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css" />
+			<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap" rel="stylesheet" type="text/css" />
+			<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet" type="text/css" />
 			<link href="https://use.fontawesome.com/releases/v5.4.1/css/svg-with-js.css" rel="stylesheet" type="text/css"></link>
 
 			<link rel="apple-touch-icon" sizes="57x57" href="andromeda/ico/apple-icon-57x57.png" />
