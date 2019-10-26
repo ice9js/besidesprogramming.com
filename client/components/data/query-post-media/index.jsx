@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 /**
  * Internal dependencies
  */
+import { fetchPostImages } from 'data/besidesprogramming/media';
 import { requestPostMedia, requestPostMediaError, updatePostMedia } from 'state/media/actions';
 
 const QueryPostMedia = ( {
@@ -19,7 +20,8 @@ const QueryPostMedia = ( {
 	const [ currentPostSlug, setCurrentPostSlug ] = useState( '' );
 
 	if ( postSlug && postSlug !== currentPostSlug ) {
-		requestPostMedia( postSlug ).then(
+		requestPostMedia( postSlug );
+		fetchPostImages( postSlug ).then(
 			( { media } ) => updatePostMedia( postSlug, media ),
 			( { status } ) => requestPostMediaError( postSlug ),
 		);
