@@ -10,6 +10,7 @@ import { thru } from 'lodash';
  */
 import Icon from 'components/icon';
 import Logo from 'components/logo';
+import ScreenReaderText from 'components/screen-reader-text';
 import Links from './links';
 import Search from './search';
 import Social from './social';
@@ -45,6 +46,7 @@ const MobileNavigation = () => {
 		<div className={ classes }>
 			<a className="navigation__logo" href="/">
 				<Logo size={ 30 } />
+				<ScreenReaderText>Logo (Go to homepage)</ScreenReaderText>
 			</a>
 			<button className="navigation__toggle" title="Navigation" onClick={ toggleNavigation }>
 				<Icon icon={ navIcon } />

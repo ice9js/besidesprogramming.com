@@ -15,7 +15,7 @@ const PageNumber = ( { active, className, page, paginationBase } ) => {
 
 	return (
 		<a className={ buttonClass } href={ formatPageUrl( paginationBase, page ) }>
-			<span className="sr-only">Page</span>
+			<ScreenReaderText>Page</ScreenReaderText>
 			{ page }
 		</a>
 	);
