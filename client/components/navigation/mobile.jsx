@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
+import classnames from 'classnames';
 import { thru } from 'lodash';
 
 /**
@@ -14,55 +14,49 @@ import Links from './links';
 import Search from './search';
 import Social from './social';
 
-class MobileNavigation extends Component {
+const MobileNavigation = () => {
+	const [ showMenu, setShowMenu ] = useState( false );
+	const [ headerState, setHeaderState ] = useState( {
+		active: true,
+		offset: 0,
+	} );
 
-	state = {
-		currentOffset: 0,
-		showHeader: true,
-		showMenu: false,
-	};
-
-	componentDidMount() {
-		window.addEventListener( 'scroll', this.handleScroll );
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener( 'scroll', this.handleScroll );
-	}
-
-	handleScroll = () => this.setState( thru( window.pageYOffset, ( offset ) => ( {
-		currentOffset: offset,
-		showHeader: offset < Math.max( this.state.currentOffset, 100 )
+	const handleScroll = () => setHeaderState( thru( document.body.scrollTop, ( offset ) => ( {
+		active: showMenu || offset < Math.max( headerState.offset, 100 ),
+		offset,
 	} ) ) );
 
-	toggleNavigation = () => this.setState( { showMenu: ! this.state.showMenu } );
+	useEffect( () => {
+		document.body.addEventListener( 'scroll', handleScroll );
 
-	render() {
-		const { showHeader, showMenu } = this.state;
+		return () => document.body.removeEventListener( 'scroll', handleScroll );
+	} );
 
-		const navClass = classNames( 'navigation', 'is-mobile', { 'is-active': showHeader });
-		const menuClass = classNames( 'navigation__menu', { 'is-active': showMenu });
-		const toggleClass = classNames( 'navigation__toggle', { 'is-active': showMenu });
+	const toggleNavigation = () => setShowMenu( ! showMenu );
 
-		const navIcon = showMenu ? 'times' : 'bars';
+	const classes = classnames( 'navigation', 'is-mobile', {
+		'is-active': headerState.active,
+		'is-expanded': showMenu,
+	} );
 
-		return (
-			<div className={ navClass }>
-				<a className="navigation__logo" href="/">
-					<Logo size={ 30 } />
-				</a>
-				<button className={ toggleClass } title="Navigation" onClick={ this.toggleNavigation }>
-					<Icon icon={ navIcon } />
-				</button>
+	const navIcon = showMenu ? 'times' : 'bars';
 
-				<div className={ menuClass }>
-					<Links onClick={ this.toggleNavigation } />
-					<Search onClick={ this.toggleNavigation } />
-					<Social />
-				</div>
+	return (
+		<div className={ classes }>
+			<a className="navigation__logo" href="/">
+				<Logo size={ 30 } />
+			</a>
+			<button className="navigation__toggle" title="Navigation" onClick={ toggleNavigation }>
+				<Icon icon={ navIcon } />
+			</button>
+
+			<div className="navigation__menu">
+				<Links onClick={ toggleNavigation } />
+				<Search onClick={ toggleNavigation } />
+				<Social />
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 export default MobileNavigation;
