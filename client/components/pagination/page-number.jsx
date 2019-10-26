@@ -8,6 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
+import ScreenReaderText from 'components/screen-reader-text';
 import { formatPageUrl } from './utils';
 
 const PageNumber = ( { active, className, page, paginationBase } ) => {
