@@ -8,9 +8,16 @@ const settings = {
 		host: 'https://besidesprogramming.com',
 		gaTrackerId: 'UA-88781129-1',
 		disqusShortname: 'besidesprogramming',
+		paths: {
+			uploads: '/wp-content/uploads'
+		},
 	},
 	api: {
 		host: 'https://besidesprogramming.com/wp-json/wp/v2',
+	},
+	photon: {
+		enabled: true,
+		host: 'https://i0.wp.com'
 	},
 	posts: {
 		perPage: 10,

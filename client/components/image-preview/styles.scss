@@ -1,0 +1,88 @@
+.image-preview {
+	background-color: $black-default;
+	padding: 0;
+	position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		top: 0;
+
+	@media #{$desktop} {
+		background-color: $white;
+		padding: 90px;
+	}
+}
+
+.image-preview__frame {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	width: 100;
+}
+
+.image-preview__image {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+.image-preview__caption {
+	color: $white;
+	display: none;
+	height: 40px;
+	line-height: 40px;
+	position: absolute;
+		bottom: 25px;
+	text-align: center;
+	width: 100%;
+
+	@media #{$desktop} {
+		display: block;
+	}
+}
+
+.image-preview__button {
+	background-color: rgba( $black, .6 );
+	border: 0;
+	border-radius: 20px;
+	color: $white;
+	font-size: 22px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	width: 40px;
+
+	.image-preview.with-controls & {
+		display: block;
+	}
+
+	@media #{$desktop} {
+		background-color: transparent;
+		color: $black;
+		display: block;
+
+		&:hover {
+			background-color: rgba( $black, .1 );
+		}
+	}
+}
+
+.image-preview__button-close {
+	position: absolute;
+		right: 25px;
+		top: 25px;
+}
+
+.image-preview__button-next {
+	margin-top: -20px;
+	position: absolute;
+		right: 25px;
+		top: 50%;
+}
+
+.image-preview__button-prev {
+	margin-top: -20px;
+	position: absolute;
+		left: 25px;
+		top: 50%;
+}

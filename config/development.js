@@ -13,6 +13,17 @@ const settings = {
 	api: {
 		host: 'https://besidesprogramming.com/wp-json/wp/v2',
 	},
+	assets: {
+		host: 'https://besidesprogramming.com',
+		paths: {
+			uploads: '/wp-content/uploads'
+		},
+	},
+	photon: {
+		enabled: true,
+		host: 'https://i0.wp.com',
+		sizes: [ 380, 570, 768, 960, 1150, 1920, 2550 ]
+	},
 	posts: {
 		perPage: 10,
 

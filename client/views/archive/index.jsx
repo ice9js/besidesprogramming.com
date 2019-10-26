@@ -26,10 +26,10 @@ const Archive = ( { match, ...props } ) => {
 	return (
 		<React.Fragment>
 			<Helmet>
-				<title>{ `Archive - Page ${ page } - ${ config( 'app.name' ) }` }</title>
+				<title>{ `All Posts - Page ${ page } - ${ config( 'app.name' ) }` }</title>
 			</Helmet>
 
-			<PageHeader text="Archive" />
+			<PageHeader text="All Posts" />
 
 			<QueryPosts query={ query } />
 			<PostsFeed

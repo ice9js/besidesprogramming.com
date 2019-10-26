@@ -33,15 +33,22 @@ const renderDocument = ( appHTML, head, preloadedState ) => renderToString(
 		preloadedState={ preloadedState } />
 );
 
+const waitForPendingRequests = () => {
+	if ( getPendingRequests().length === 0 ) {
+		return Promise.resolve();
+	}
+
+	return Promise.all( map(
+		getPendingRequests(),
+		( request ) => request.catch( () => Promise.resolve() )
+	) ).then( waitForPendingRequests );
+};
+
 export default ( req, res, next ) => {
 	// First render to trigger any async requests
 	renderPage( req.url, {} );
 
-	// Ignore errors and wait until all requests have completed before rendering again and sending a response
-	Promise.all( map(
-		getPendingRequests(),
-		( request ) => request.catch( () => Promise.resolve() )
-	) ).then( () => {
+	waitForPendingRequests().then( () => {
 		res.send( renderHTML(
 			renderDocument(
 				{

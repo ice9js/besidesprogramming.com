@@ -5,6 +5,7 @@
 
 /build
 /node_modules
+/npm-debug.log
 /public/app.js
 /public/styles-debug.css
 /public/styles-debug.css.map
