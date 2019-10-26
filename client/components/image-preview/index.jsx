@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom';
  * Internal dependencies
  */
 import Icon from 'components/icon';
+import ScreenReaderText from 'components/screen-reader-text';
 import { getImageUrl, getSizes, getSrcSet } from './utils';
 
 const ImagePreview = ( { history, image, nextUrl, onClose, previousUrl } ) => {
@@ -70,19 +71,19 @@ const ImagePreview = ( { history, image, nextUrl, onClose, previousUrl } ) => {
 
 			<nav>
 				<button className="image-preview__button image-preview__button-close" onClick={ onClose }>
-					<span className="sr-only">Close image preview</span>
+					<ScreenReaderText>Close image preview</ScreenReaderText>
 					<Icon icon="times" />
 				</button>
 
 				{ previousUrl && (
 					<a className="image-preview__button image-preview__button-prev" href={ previousUrl }>
-						<span className="sr-only">Previous image</span>
+						<ScreenReaderText>Previous image</ScreenReaderText>
 						<Icon icon="arrow-left" />
 					</a>
 				) }
 				{ nextUrl && (
 					<a className="image-preview__button image-preview__button-next" href={ nextUrl }>
-						<span className="sr-only">Next image</span>
+						<ScreenReaderText>Next image</ScreenReaderText>
 						<Icon icon="arrow-right" />
 					</a>
 				) }

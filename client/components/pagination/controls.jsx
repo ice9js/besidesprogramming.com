@@ -5,6 +5,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { filter, omit } from 'lodash';
 
+/**
+ * Internal dependencies
+ */
+import ScreenReaderText from 'components/screen-reader-text';
+
 const Controls = ( props ) => {
 	const Element = props.disabled ? 'button' : 'a';
 
@@ -18,7 +23,7 @@ const Controls = ( props ) => {
 	return (
 		<Element { ...omit( props, ommittedProps ) }>
 			{ props.icon }
-			<span className="sr-only">{ props.label }</span>
+			<ScreenReaderText>{ props.label }</ScreenReaderText>
 		</Element>
 	);
 };

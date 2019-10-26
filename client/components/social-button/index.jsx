@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import Icon from 'components/icon';
+import ScreenReaderText from 'components/screen-reader-text';
 
 const SocialButton = ( { icon, title, url } ) => (
 	<a className="social-button" href={ url } rel="noopener" target="_blank">
-		<span className="sr-only">{ `${ title } (Opens in a new window)` } </span>
+		<ScreenReaderText>{ `${ title } (Opens in a new window)` }</ScreenReaderText>
 		<Icon icon={ icon } />
 	</a>
 );

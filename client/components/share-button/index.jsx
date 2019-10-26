@@ -5,6 +5,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+/**
+ * Internal dependencies
+ */
+import ScreenReaderText from 'components/screen-reader-text';
+
 const ShareButton = ( { className, compact, icon, label, url } ) => {
 	const buttonClass = classNames( 'share-button', className, { 'is-compact': compact } );
 
@@ -14,7 +19,7 @@ const ShareButton = ( { className, compact, icon, label, url } ) => {
 			{ ! compact && (
 				<span className="share-button__label">{ label }</span>
 			) }
-			<span className="sr-only">{ `${ label } (Opens a new window)` }</span>
+			<ScreenReaderText>{ `${ label } (Opens a new window)` }</ScreenReaderText>
 		</a>
 	);
 }
