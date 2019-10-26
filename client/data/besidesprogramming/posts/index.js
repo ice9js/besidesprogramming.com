@@ -8,13 +8,9 @@ import { parseResponse } from './utils';
 
 const apiHost = config( 'api.host' );
 
-const fetchPosts = ( { query } ) => http( {
+export const fetchPosts = ( query ) => http( {
 	host: apiHost,
 	path: '/wp/v2/posts',
 	method: 'GET',
 	params: query,
 } ).then( parseResponse );
-
-export default ( {
-	[ REQUEST_POSTS ]: fetchPosts
-} );

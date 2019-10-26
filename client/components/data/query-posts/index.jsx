@@ -9,6 +9,7 @@ import { isEqual } from 'lodash';
 /**
  * Internal dependencies
  */
+import { fetchPosts } from 'data/besidesprogramming/posts';
 import { requestPosts, requestPostsError, updatePosts } from 'state/posts/actions';
 import { getPostsLoadingStatus, getPostsError, getQuery } from 'state/posts/selectors';
 
@@ -22,7 +23,8 @@ const QueryPosts = ( {
 	updatePosts
 } ) => {
 	if ( ! isEqual( query, lastQuery ) && ! loading ) {
-		requestPosts( query ).then(
+		requestPosts( query );
+		fetchPosts( query ).then(
 			( { items, total, totalPages } ) => updatePosts( items, total, totalPages ),
 			( { status } ) => requestPostsError( status ),
 		);

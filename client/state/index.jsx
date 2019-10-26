@@ -6,8 +6,6 @@ import { createStore, applyMiddleware } from 'redux';
 /**
  * Internal dependencies
  */
-import { registerHTTPHandlers } from 'data';
-import { dispatchWithHTTP } from 'lib/http/middleware';
 import rootReducer from 'state/reducers';
 
 const config = [
@@ -25,9 +23,5 @@ if ( typeof window !== 'undefined' ) {
 }
 
 const store = createStore( ...config );
-
-// Set up data layer
-store.dispatch = dispatchWithHTTP( store );
-registerHTTPHandlers();
 
 export default store;
