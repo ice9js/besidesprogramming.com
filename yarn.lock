@@ -5166,6 +5166,11 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
+react-use-gesture@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-6.0.1.tgz#c66d686c63a2469de3ae178e19e3d1a04c526bf6"
+  integrity sha512-RgQ6gYf2yahakB7wZD04Vu4uj6NWj28DVh188dGUIN4+Mlw1LqxnfWBTBDF7ggDXlZ3cWxbZHUvlyO1WeEFZnA==
+
 react@^16.0.0:
   version "16.8.5"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.5.tgz#49be3b655489d74504ad994016407e8a0445de66"

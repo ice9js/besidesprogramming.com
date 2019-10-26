@@ -1,8 +1,11 @@
 /**
  * External dependencies
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { useGesture } from 'react-use-gesture';
+import { withRouter } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -10,10 +13,11 @@ import PropTypes from 'prop-types';
 import Icon from 'components/icon';
 import { getImageUrl, getSizes, getSrcSet } from './utils';
 
-const ImagePreview = ( { image, next, onClose, previous } ) => {
-	const url = `https://besidesprogramming.com/wp-content/uploads/${ image.file }`;
+const ImagePreview = ( { history, image, nextUrl, onClose, previousUrl } ) => {
+	const [ showControls, setShowControls ] = useState( true );
+	const preview = useRef( null );
 
-	// Disable scrolling while preview is active
+	// Disable window scrolling while preview is active
 	useEffect( () => {
 		if ( ! document ) {
 			return;
@@ -23,8 +27,37 @@ const ImagePreview = ( { image, next, onClose, previous } ) => {
 		return () => document.body.style = '';
 	} );
 
+	// Set up gesture handlers
+	const bind = useGesture( {
+		onDrag: ( { last, vxvy: [ vx, vy ] } ) => {
+			// Swipe down - close preview
+			if ( last && Math.abs( vx ) < 0.3 && vy > 0.3 ) {
+				return onClose();
+			}
+
+			// Swipe left - next image
+			if ( nextUrl && last && Math.abs( vy ) < 0.3 && vx < -0.3 ) {
+				return history.push( nextUrl );
+			}
+
+			// Swipe right - previous image
+			if ( previousUrl && last && Math.abs( vy ) < 0.3 && vx > 0.3 ) {
+				return history.push( previousUrl );
+			}
+		},
+		onPinch: ( state ) => {
+
+		},
+	}, { domTarget: preview } );
+	useEffect( bind, [ bind ] );
+
+	const url = `https://besidesprogramming.com/wp-content/uploads/${ image.file }`;
+	const classes = classNames( 'image-preview', {
+		'with-controls': showControls,
+	} );
+
 	return (
-		<div className="image-preview">
+		<div ref={ preview } className={ classes }>
 			<figure className="image-preview__frame">
 				<img
 					className="image-preview__image"
@@ -41,14 +74,14 @@ const ImagePreview = ( { image, next, onClose, previous } ) => {
 					<Icon icon="times" />
 				</button>
 
-				{ previous && (
-					<a className="image-preview__button image-preview__button-prev" href={ previous.id }>
+				{ previousUrl && (
+					<a className="image-preview__button image-preview__button-prev" href={ previousUrl }>
 						<span className="sr-only">Previous image</span>
 						<Icon icon="arrow-left" />
 					</a>
 				) }
-				{ next && (
-					<a className="image-preview__button image-preview__button-next" href={ next.id }>
+				{ nextUrl && (
+					<a className="image-preview__button image-preview__button-next" href={ nextUrl }>
 						<span className="sr-only">Next image</span>
 						<Icon icon="arrow-right" />
 					</a>
@@ -62,13 +95,9 @@ ImagePreview.propTypes = {
 	image: PropTypes.shape( {
 		file: PropTypes.string.isRequired,
 	} ),
-	next: PropTypes.shape( {
-		id: PropTypes.number.isRequired,
-	} ),
+	nextUrl: PropTypes.string,
 	onClose: PropTypes.func.isRequired,
-	previous: PropTypes.shape( {
-		id: PropTypes.number.isRequired,
-	} ),
+	previous: PropTypes.string,
 };
 
-export default ImagePreview;
+export default withRouter( ImagePreview );

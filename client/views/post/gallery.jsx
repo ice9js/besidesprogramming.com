@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,11 +32,15 @@ const Gallery = ( { history, currentImage, loading, nextImage, previousImage, po
 		<React.Fragment>
 			<QueryPostMedia postSlug={ postSlug } />
 
+			<Helmet>
+				<meta name="robots" content="noindex" />
+			</Helmet>
+
 			{ currentImage && (
 				<ImagePreview
 					image={ currentImage }
-					next={ nextImage }
-					previous={ previousImage }
+					nextUrl={ nextImage && `/${ postSlug }/images/${ nextImage.id }` }
+					previousUrl={ previousImage && `/${ postSlug }/images/${ previousImage.id }` }
 					onClose={ redirectToPost } />
 			) }
 		</React.Fragment>
