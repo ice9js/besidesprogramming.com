@@ -5,22 +5,25 @@ const settings = {
 	env: 'development',
 	app: {
 		name: 'Besides Programming',
+		description: 'Code is the easy part. A blog about programming and more.',
 		host: 'besidesprogramming.localhost',
 		port: 3000,
 		gaTrackerId: 'UA-88781129-1',
 		disqusShortname: 'besidesprogramming-dev',
+		twitterHandle: 'ice9js',
+		openGraphImage: 'https://besidesprogramming.com/img/open-graph-default-image.png',
 	},
 	api: {
-		host: 'https://besidesprogramming.com/wp-json/wp/v2',
+		host: 'http://besidesprogramming-wp.local/wp-json',
 	},
 	assets: {
-		host: 'https://besidesprogramming.com',
+		host: 'https://besidesprogramming-wp.local',
 		paths: {
 			uploads: '/wp-content/uploads'
 		},
 	},
 	photon: {
-		enabled: true,
+		enabled: false,
 		host: 'https://i0.wp.com',
 		sizes: [ 380, 570, 768, 960, 1150, 1920, 2550 ]
 	},

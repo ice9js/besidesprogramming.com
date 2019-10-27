@@ -2,12 +2,12 @@
  * External dependencies
  */
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
+import HeaderMeta from 'components/header-meta';
 import PageHeader from 'components/page-header';
 import PostsFeed from 'components/posts-feed';
 import QueryPosts from 'components/data/query-posts';
@@ -30,9 +30,10 @@ const Category = ( { match, ...props } ) => {
 
 	return (
 		<React.Fragment>
-			<Helmet>
-				<title>{ `${ category.label } - Page ${ page } - ${ config( 'app.name' ) }` }</title>
-			</Helmet>
+			<HeaderMeta
+				title={ `${ category.label } - Page ${ page }` }
+				url={ `${ config( 'app.host' ) }/${ match.params.category }/${ page }` }
+			/>
 
 			<PageHeader text={ category.label } />
 

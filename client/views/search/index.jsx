@@ -37,6 +37,8 @@ const Search = ( { location, match, ...props } ) => {
 		<React.Fragment>
 			<Helmet>
 				<title>{ `${ title } - ${ config( 'app.name' ) }` }</title>
+				<meta name="description" content={ config( 'app.description' ) } />
+				<meta property="og:image" content={ config( 'app.openGraphImage' ) } />
 			</Helmet>
 
 			<PageHeader text="Search" />
