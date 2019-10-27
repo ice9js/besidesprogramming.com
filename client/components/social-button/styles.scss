@@ -1,7 +1,9 @@
 .social-button {
-	background-color: $black;
+	background-color: $color-gray-100;
+	background-color: var( --color-accent );
 	border-radius: 20px;
-	color: $background-grey;
+	color: $color-white;
+	color: var( --color-text-inverted );
 	display: block;
 	height: 40px;
 	line-height: 40px;

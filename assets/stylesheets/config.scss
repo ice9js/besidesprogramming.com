@@ -15,20 +15,35 @@ $code: 'Source Code Pro', monospace;
 
 // Colors ---------------------------------------------------------------------
 
-$white: #fff;
-$background-grey: #fdfdff;
-$background-grey: #fffffd;
-$background-alternative: #f9f9fb;
-$light-grey: #e0e0e8;
-$medium-grey: #d4d4d4;
-$dark-grey: #ccc;
-$black: #111;
-$black-default: #000;
+$color-white: #fff;
+$color-black: #000;
 
-$text-headers: #111;
-$text-content: #666;
-$links: #0fb2e8;
+$color-gray-0: #f8f8f8;
+$color-gray-5: #ececec;
+$color-gray-10: #e1e1e1;
+$color-gray-20: #cacaca;
+$color-gray-30: #b3b3b3;
+$color-gray-40: #9c9c9c;
+$color-gray-50: #858585;
+$color-gray-60: #6e6e6e;
+$color-gray-70: #575757;
+$color-gray-80: #404040;
+$color-gray-90: #292929;
+$color-gray-100: #121212;
 
-$facebook: #3b5998;
-$twitter: #4099ff;
-$pinterest: #c92228;
+$color-blue-0: #ebf6fa;
+$color-blue-5: #d8f5fe;
+$color-blue-10: #c3f3ff;
+$color-blue-20: #a3eaff;
+$color-blue-30: #77ddfd;
+$color-blue-40: #44c9f5;
+$color-blue-50: #0fb2e8;
+$color-blue-60: #0798c9;
+$color-blue-70: #057ba3;
+$color-blue-80: #075a77;
+$color-blue-90: #083646;
+$color-blue-100: #031014;
+
+$color-facebook: #3b5998;
+$color-twitter: #4099ff;
+$color-pinterest: #c92228;

@@ -14,7 +14,8 @@
 }
 
 .navigation.is-mobile {
-	background-color: $background-grey;
+	background-color: $color-white;
+	background-color: var( --color-background );
 	display: flex;
 	flex-direction: row;
 	padding: 25px;
@@ -61,7 +62,9 @@
 .navigation__toggle {
 	background-color: transparent;
 	border: 0;
-	color: $black;
+	// is this necessary ?
+	color: $color-gray-80;
+	color: var( --color-text );
 	cursor: pointer;
 	font-size: 20px;
 	height: 30px;
@@ -71,7 +74,8 @@
 	z-index: 100;
 
 	.navigation.is-expanded & {
-		color: $white;
+		color: $color-white;
+		color: var( --color-text-inverted );
 	}
 
 	@media #{$tablet-wide} {
@@ -83,7 +87,8 @@
 }
 
 .navigation__menu {
-	background-color: $black;
+	background-color: $color-gray-100;
+	background-color: var( --color-accent );
 	display: flex;
 	flex-direction: column;
 	padding: 80px 25px 25px;
@@ -99,7 +104,8 @@
 	}
 
 	.navigation__link-anchor {
-		color: $white;
+		color: $color-white;
+		color: var( --color-text-inverted );
 	}
 
 	@media #{$tablet} {
@@ -126,7 +132,8 @@
 }
 
 .navigation__link-anchor {
-	color: $black;
+	color: $color-gray-100;
+	color: var( --color-neutral );
 	font-family: $headers;
 	font-size: 36px;
 	height: 42px;
@@ -134,19 +141,22 @@
 }
 
 .navigation__search {
-	color: $text-content;
+	color: $color-gray-80;
+	color: var( --color-text );
 	font-family: $headers;
 	font-size: 28px;
 	margin: 0 0 30px;
 	text-align: right;
 
 	@media #{$desktop} {
-		color: $dark-grey;
+		color: $color-gray-20;
+		color: var( --color-text-subtle );
 		text-align: left;
 		transition: color .2s;
 
 		&:hover {
-			color: $black;
+			color: $color-gray-100;
+			color: var( --color-neutral );
 		}
 
 		&::after {

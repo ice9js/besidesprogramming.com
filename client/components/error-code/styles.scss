@@ -10,7 +10,8 @@
 }
 
 .error-code__header {
-  color: $text-headers;
+  color: $color-gray-100;
+  color: var( --color-accent );
   font-family: $headers;
   font-size: 30px;
   font-weight: bold;
@@ -25,7 +26,6 @@
 }
 
 .error-code__message {
-  color: $text-content;
   font-family: $text;
   margin: 0 0 50px;
   width: 100%;
@@ -37,7 +37,8 @@
 }
 
 .error-code__code {
-  color: $medium-grey;
+  color: $color-gray-20;
+  color: var( --color-text-subtle );
   font-family: $headers;
   font-size: 100px;
   font-weight: bold;

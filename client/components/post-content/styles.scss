@@ -12,7 +12,8 @@
 .post-content h1, .post-content h2, .post-content h3,
 .post-content h4, .post-content h5, .post-content h6 {
 	box-sizing: border-box;
-	color: $text-headers;
+	color: $color-gray-100;
+	color: var( --color-accent );
 	font-family: $headers;
 	font-weight: bold;
 	margin: 25px 0 10px;
@@ -52,10 +53,13 @@
 }
 
 .post-content pre {
-	background-color: $background-alternative;
+	background-color: $color-gray-0;
+	background-color: var( --color-background-alternate );
 	border: 0;
-	border-bottom: 1px solid $light-grey;
-	border-top: 1px solid $light-grey;
+	border-color: $color-gray-10;
+	border-color: var( --color-border );
+	border-style: solid;
+	border-width: 1px 0 1px;
 	box-sizing: border-box;
 	margin: 0 0 20px;
 	overflow-x: scroll;
@@ -63,13 +67,14 @@
 
 	@media #{$tablet-wide} {
 		border-radius: 3px;
-		border: 1px solid $light-grey;
+		border-width: 1px;
 		width: 100%;
 	}
 }
 
 .post-content code {
-	background-color: $background-alternative;
+	background-color: $color-gray-0;
+	background-color: var( --color-background-alternate );
 	box-sizing: border-box;
 	font-family: $code;
 	font-size: 14px;
@@ -86,13 +91,15 @@
 
 .post-content p code {
 	border-radius: 3px;
-	border: 1px solid $light-grey;
+	border: 1px solid $color-gray-10;
+	border: 1px solid var( --color-border );
 	padding: 0 4px;
 	white-space: nowrap;
 }
 
 .post-content blockquote {
-	border-left: 7px solid $dark-grey;
+	border-left: 7px solid $color-gray-80;
+	border-left: 7px solid var( --color-accent-light );
 	box-sizing: border-box;
 	margin: 0 0 20px 25px;
 	padding: 5px 0;
@@ -122,7 +129,8 @@
 }
 
 .post-content a {
-	color: $links;
+	color: $color-blue-50;
+	color: var( --color-text-link );
 }
 
 .post-content ul, .post-content ol {
@@ -139,13 +147,15 @@
 }
 
 .post-content ul pre, .post-content ol pre {
-	border: 1px solid $light-grey;
+	border: 1px solid $color-gray-10;
+	border: 1px solid var( --color-border );
 	border-radius: 3px;
 }
 
 .post-content hr {
 	border: 0;
-	border-bottom: 1px solid $medium-grey;
+	border-bottom: 1px solid $color-gray-10;
+	border-bottom: 1px solid var( --color-border );
 	margin: 0 0 20px;
 	width: 100%;
 }

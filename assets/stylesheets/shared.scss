@@ -12,8 +12,10 @@ html {
 }
 
 body {
-	background-color: $background-grey;
-	color: $text-content;
+	background-color: $color-white;
+	background-color: var( --color-background );
+	color: $color-gray-80;
+	color: var( --color-text );
 	font-size: 18px;
 	height: 100%;
 	overflow: auto;
@@ -28,26 +30,23 @@ a, button {
 	cursor: pointer;
 }
 
-@keyframes loading-pulse {
-	0% {
-		background-color: lighten( $light-grey, 5% );
-	}
-	50% {
-		background-color: $light-grey;
-	}
-	100% {
-		background-color: lighten( $light-grey, 5% );
-	}
-}
-
 .facebook {
-	background-color: $facebook;
+	background-color: $color-facebook;
+	background-color: var( --color-facebook );
+	color: $color-white;
+	color: var( --color-text-inverted );
 }
 
 .twitter {
-	background-color: $twitter;
+	background-color: $color-twitter;
+	background-color: var( --color-twitter );
+	color: $color-white;
+	color: var( --color-text-inverted );
 }
 
 .pinterest {
-	background-color: $pinterest;
+	background-color: $color-pinterest;
+	background-color: var( --color-pinterest );
+	color: $color-white;
+	color: var( --color-text-inverted );
 }
