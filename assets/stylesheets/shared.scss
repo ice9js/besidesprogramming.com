@@ -1,5 +1,4 @@
 * {
-	font-family: $text;
 	margin: 0;
 	outline: 0;
 	padding: 0;
@@ -16,6 +15,7 @@ body {
 	background-color: var( --color-background );
 	color: $color-gray-80;
 	color: var( --color-text );
+	font-family: $text;
 	font-size: 18px;
 	height: 100%;
 	overflow: auto;
