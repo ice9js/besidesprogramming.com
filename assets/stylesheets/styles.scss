@@ -1,10 +1,12 @@
 @import "./config.scss";
+@import "./themes.scss";
 @import "./shared.scss";
 
 @import "components/app/styles.scss";
 @import "components/error-code/styles.scss";
 @import "components/disqus-thread/styles.scss";
 @import "components/image-preview/styles.scss";
+@import "components/logo/styles.scss";
 @import "components/navigation/styles.scss";
 @import "components/page-header/styles.scss";
 @import "components/pagination/styles.scss";

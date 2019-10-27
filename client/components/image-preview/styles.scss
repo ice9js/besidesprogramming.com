@@ -1,5 +1,6 @@
 .image-preview {
-	background-color: $black-default;
+	background-color: $color-black;
+	background-color: var( --color-black );
 	padding: 0;
 	position: fixed;
 		bottom: 0;
@@ -8,7 +9,8 @@
 		top: 0;
 
 	@media #{$desktop} {
-		background-color: $white;
+		background-color: $color-white;
+		background-color: var( --color-background );
 		padding: 90px;
 	}
 }
@@ -27,7 +29,8 @@
 }
 
 .image-preview__caption {
-	color: $white;
+	color: $color-white;
+	color: var( --color-text-inverted );
 	display: none;
 	height: 40px;
 	line-height: 40px;
@@ -42,10 +45,11 @@
 }
 
 .image-preview__button {
-	background-color: rgba( $black, .6 );
+	background-color: rgba( $color-black, .6 );
 	border: 0;
 	border-radius: 20px;
-	color: $white;
+	color: $color-white;
+	color: var( --color-text-inverted );
 	font-size: 22px;
 	height: 40px;
 	line-height: 40px;
@@ -58,11 +62,12 @@
 
 	@media #{$desktop} {
 		background-color: transparent;
-		color: $black;
+		color: $color-gray-100;
+		color: var( --color-neutral );
 		display: block;
 
 		&:hover {
-			background-color: rgba( $black, .1 );
+			background-color: rgba( $color-black, .1 );
 		}
 	}
 }

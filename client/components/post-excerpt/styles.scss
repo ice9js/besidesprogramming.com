@@ -17,7 +17,8 @@
 
 .post-excerpt__read-more {
 	background-color: transparent;
-	color: $medium-grey;
+	color: $color-gray-20;
+	color: var( --color-text-subtle );
 	font-size: 22px;
 	font-weight: bold;
 	height: 40px;

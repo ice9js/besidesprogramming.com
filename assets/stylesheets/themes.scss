@@ -1,0 +1,23 @@
+:root {
+	--color-white: #{$color-white};
+	--color-black: #{$color-black};
+
+	--color-background: #{$color-white};
+	--color-background-alternate: #{$color-gray-0};
+	--color-border: #{$color-gray-10};
+
+	--color-neutral: #{$color-gray-100};
+	--color-primary: #{$color-gray-100};
+	--color-accent: #{$color-gray-100};
+	--color-accent-light: #{$color-gray-80};
+
+	--color-text: #{$color-gray-80};
+	--color-text-bold: #{$color-gray-100};
+	--color-text-inverted: #{$color-white};
+	--color-text-link: #{$color-blue-50};
+	--color-text-subtle: #{$color-gray-20};
+
+	--color-facebook: #{$color-facebook};
+	--color-twitter: #{$color-twitter};
+	--color-pinterest: #{$color-pinterest};
+}

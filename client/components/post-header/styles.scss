@@ -11,7 +11,8 @@
 }
 
 .post-header__title {
-	color: $text-headers;
+	color: $color-gray-100;
+	color: var( --color-accent );
 	font-family: $headers;
 	font-size: 45px;
 	font-weight: bold;
@@ -34,7 +35,8 @@
 }
 
 .post-header__date {
-	color: $medium-grey;
+	color: $color-gray-20;
+	color: var( --color-text-subtle );
 	font-family: $headers;
 	font-size: 18px;
 	font-weight: bold;
