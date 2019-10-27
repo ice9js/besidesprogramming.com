@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 /**
  * Internal dependencies
  */
+import HeaderMeta from 'components/header-meta';
 import PostsFeed from 'components/posts-feed';
 import QueryPosts from 'components/data/query-posts';
 import { config } from 'config';
@@ -21,9 +22,7 @@ const query = {
 
 const Home = ( props ) => (
 	<React.Fragment>
-		<Helmet>
-			<title>{ `Home - ${ config( 'app.name' ) }` }</title>
-		</Helmet>
+		<HeaderMeta title="Home" url={ config( 'app.host' ) } />
 
 		<QueryPosts query={ query } />
 		<PostsFeed { ...props } />

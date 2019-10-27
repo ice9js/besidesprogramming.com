@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { trimEnd } from 'lodash';
 
 /**
  * Internal dependencies
@@ -31,7 +32,20 @@ const Post = ( { error, loading, post } ) => {
 	return (
 		<React.Fragment>
 			<Helmet>
-				<title>{ `${ post.title } - ${ config( 'app.name' ) }`  }</title>
+				<title>{ `${ post.title }`  }</title>
+				<meta name="description" content={ post.excerpt.replace( /(<[^<]*>)/gi, '' ) } />
+
+				<meta property="og:type" content="article" />
+				<meta property="og:url" content={ trimEnd( post.link, '/' ) } />
+				<meta property="og:title" content={ post.title } />
+				<meta property="og:description" content={ post.excerpt.replace( /(<[^<]*>)/gi, '' ) } />
+				<meta property="og:image" content={ post.image || config( 'app.openGraphImage' ) } />
+				<meta property="article:published_time" content={ post.date } />
+				<meta property="article:modified_time" content={ post.modified } />
+				<meta property="article:author" content={ post.author } />
+
+				<meta property="twitter:site" content={ config( 'app.twitterHandle' ) } />
+				<meta property="twitter:creator" content={ config( 'app.twitterHandle' ) } />
 			</Helmet>
 
 			<PostHeader { ...post } />

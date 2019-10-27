@@ -7,10 +7,10 @@ const Document = ( { appHTML, head, preloadedState } ) => (
 	<html lang="en">
 		<head>
 			{ head.title.toComponent() }
+			{ head.meta.toComponent() }
 
 			<meta charSet="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<meta name="description" content="" />
 
 			<link href="/andromeda/styles.min.css" rel="stylesheet" type="text/css" media="screen" />
 

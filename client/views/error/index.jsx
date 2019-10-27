@@ -17,6 +17,7 @@ const ErrorView = ( { status } ) => {
 		<React.Fragment>
 			<Helmet>
 				<title>{ `${ message } - ${ config( 'app.name' ) }` }</title>
+				<meta name="robots" content="noindex" />
 			</Helmet>
 
 			<ErrorCode code={ status } />
