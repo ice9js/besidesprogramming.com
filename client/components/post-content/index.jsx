@@ -3,7 +3,7 @@
  */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { highlightBlock } from 'highlightjs';
+import { highlightBlock } from 'highlight.js';
 import { forEach } from 'lodash';
 
 const PostContent = ( { content } ) => {
