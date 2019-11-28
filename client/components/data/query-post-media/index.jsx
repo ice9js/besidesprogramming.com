@@ -21,9 +21,11 @@ const QueryPostMedia = ( {
 
 	if ( postSlug && postSlug !== currentPostSlug ) {
 		requestPostMedia( postSlug );
-		fetchPostImages( postSlug ).then(
+
+		fetchPostImages(
+			postSlug,
 			( { media } ) => updatePostMedia( postSlug, media ),
-			( { status } ) => requestPostMediaError( postSlug ),
+			() => requestPostMediaError( postSlug )
 		);
 
 		setCurrentPostSlug( postSlug );

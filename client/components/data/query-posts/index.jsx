@@ -24,9 +24,10 @@ const QueryPosts = ( {
 } ) => {
 	if ( ! isEqual( query, lastQuery ) && ! loading ) {
 		requestPosts( query );
-		fetchPosts( query ).then(
+		fetchPosts(
+			query,
 			( { items, total, totalPages } ) => updatePosts( items, total, totalPages ),
-			( { status } ) => requestPostsError( status ),
+			( error ) => requestPostsError( error.status )
 		);
 	}
 

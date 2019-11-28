@@ -37,30 +37,26 @@ const handleFailure = ( error ) => Promise.reject( {
 /**
  * Handles responses of successful requests
  *
- * @param  {string} uri
  * @param  {Response} rawResponse
  * @return {Promise}
  */
-const handleSuccess = ( uri, rawResponse ) => {
-	if ( ! inRange( rawResponse.status, 200, 300 ) ) {
-		return handleFailure( rawResponse );
-	}
-
-	return rawResponse.json().then(
+const handleSuccess = ( rawResponse ) =>
+	rawResponse.json().then(
 		( data ) => Promise.resolve( {
 			headers: headers( rawResponse ),
 			data,
 		} )
 	);
-};
 
 /**
  * Sends async HTTP requests
  *
  * @param  {Object} options
- * @return {Promise}
+ * @param  {Function} onSuccess
+ * @param  {Function} onError
+ * @param  {Function} fromApi
  */
-export const http = ( options ) => {
+export const http = ( options, onSuccess, onError, fromApi = null ) => {
 	let uri = options.path;
 
 	if ( options.method === 'GET' && options.params ) {
@@ -72,11 +68,17 @@ export const http = ( options ) => {
 
 	// Set up the request promise and mark as pending
 	pendingRequests[ requestId ] = fetch( `${ options.host }${ uri }` )
-		.then( ( rawResponse ) => handleSuccess( uri, rawResponse ) )
-		.catch( ( error ) => handleFailure( error ) )
+		.then(
+			( rawResponse ) => {
+				return inRange( rawResponse.status, 200, 300 )
+					? handleSuccess( rawResponse )
+					: handleFailure( rawResponse );
+			},
+			( error ) => handleFailure( error, onError ),
+		)
+		.then( ( response ) => typeof fromApi === 'function' ? fromApi( response ) : response )
+		.then( onSuccess, onError )
 		.finally( () => {
 			delete pendingRequests[ requestId ];
 		} );
-
-	return pendingRequests[ requestId ];
 };

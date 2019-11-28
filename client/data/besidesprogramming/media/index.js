@@ -8,8 +8,13 @@ import { parseResponse } from './utils';
 
 const apiHost = config( 'api.host' );
 
-export const fetchPostImages = ( postSlug ) => http( {
-	host: apiHost,
-	path: `/andromeda/v1/posts/${ postSlug }/images`,
-	method: 'GET',
-} ).then( parseResponse );
+export const fetchPostImages = ( postSlug, onSuccess, onError ) => http(
+	{
+		host: apiHost,
+		path: `/andromeda/v1/posts/${ postSlug }/images`,
+		method: 'GET',
+	},
+	onSuccess,
+	onError,
+	parseResponse
+);
