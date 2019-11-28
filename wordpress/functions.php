@@ -89,8 +89,8 @@ function andromeda_get_post_images( $post_id ) {
 	$media = get_attached_media( 'image', $post_id );
 
 	return array_combine(
-		array_map( function ( $image ) {
-			return wp_get_attachment_image_src( $image->ID, 'full' )[ 0 ];
+		array_map( function ( $attachment ) {
+			return $attachment->ID;
 		}, $media ),
 		$media
 	);
@@ -107,29 +107,26 @@ register_rest_route( 'andromeda/v1', '/posts/(?P<slug>[a-zA-Z0-9-]+)/images', [
 			'numberposts' => 1,
 		] );
 
-		// 404 if post not found
 		if ( empty( $posts ) ) {
 			return new WP_Error( 'resource_does_not_exist', __( 'No resource exists under this address.' ), [ 'status' => 404 ] );
 		}
 
-		// Get all post attachments
-		$post_images = andromeda_get_post_images( $posts[ 0 ]->ID );
+		$post = array_shift( $posts );
 
-		// Load post content
-		$post_content = new DomDocument();
+		preg_match_all( '/<!-- wp:image (.*) -->/', $post->post_content, $matches );
+		$content_images = array_map( function ( $match ) {
+			return json_decode( $match );
+		}, $matches[ 1 ] );
 
-		// DomDocument doesn't understand HTML5 tags
-		libxml_use_internal_errors( true );
-		$post_content->loadHTML( apply_filters( 'the_content', $posts[ 0 ]->post_content ) );
-		libxml_clear_errors();
+		$gallery = array_filter( $content_images, function ( $image ) {
+			return $image &&
+				isset( $image->linkDestination ) &&
+				$image->linkDestination === 'attachment';
+		} );
 
-		// Filter and order images by their appearance in post content
-		$content_images = array_map( function ( $image ) use ( $post_images ) {
-			return $post_images[ $image->getAttribute( 'src' ) ] ?? null;
-		}, iterator_to_array( $post_content->getElementsByTagName( 'img' ) ) );
-
-		// Prepare response data
-		return array_map( function ( $image ) use ( $request ) {
+		$post_images = andromeda_get_post_images( $post->ID );
+		return array_map( function ( $gallery_image ) use ( $post_images ) {
+			$image = $post_images[ $gallery_image->id ];
 			$meta = wp_get_attachment_metadata( $image->ID );
 
 			return [
@@ -142,6 +139,6 @@ register_rest_route( 'andromeda/v1', '/posts/(?P<slug>[a-zA-Z0-9-]+)/images', [
 				'file' => $meta[ 'file' ],
 				'meta' => $meta[ 'image_meta' ],
 			];
-		}, array_filter( $content_images ) );
+		}, array_values( $gallery ) );
 	},
 ] );
