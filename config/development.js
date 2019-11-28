@@ -8,7 +8,7 @@ const settings = {
 		description: 'Code is the easy part. A blog about programming and more.',
 		host: 'besidesprogramming.localhost',
 		port: 3000,
-		gaTrackerId: 'UA-88781129-1',
+		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming-dev',
 		twitterHandle: 'ice9js',
 		openGraphImage: 'https://besidesprogramming.com/img/open-graph-default-image.png',

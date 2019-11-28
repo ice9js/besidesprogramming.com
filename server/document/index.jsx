@@ -3,6 +3,11 @@
  */
 import React from 'react';
 
+/**
+ * Internal dependencies
+ */
+import { config } from 'config';
+
 const Document = ( { appHTML, head, preloadedState } ) => (
 	<html lang="en">
 		<head>
@@ -37,12 +42,35 @@ const Document = ( { appHTML, head, preloadedState } ) => (
 			<meta name="msapplication-TileColor" content="#ffffff" />
 			<meta name="msapplication-TileImage" content="andromeda/ico/ms-icon-144x144.png" />
 			<meta name="theme-color" content="#ffffff" />
+
+			<script async src={ `https://www.googletagmanager.com/gtm.js?id=${ config( 'app.gtmId' ) }` } />
+			<script
+				dangerouslySetInnerHTML={ {
+					__html: `
+						window.dataLayer = window.dataLayer || [];
+						window.dataLayer.push( {
+							'gtm.start': new Date().getTime(),
+							event: 'gtm.js',
+						} );
+					`,
+				} }
+			/>
 		</head>
 		<body>
+			<noscript>
+				<iframe
+					src={ `https://www.googletagmanager.com/ns.html?id=${ config( 'app.gtmId' ) }"` }
+					height={ 0 }
+					width={ 0 }
+					style={ { display: 'none', visibility: 'higgen' } }
+				/>
+			</noscript>
+
 			<div
 				id="app"
 				data-preloaded-state={ JSON.stringify( preloadedState ) }
-				dangerouslySetInnerHTML={ appHTML } />
+				dangerouslySetInnerHTML={ appHTML }
+			/>
 			<script type="text/javascript" src="/andromeda/app.js"></script>
 		</body>
 	</html>

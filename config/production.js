@@ -6,7 +6,7 @@ const settings = {
 	app: {
 		name: 'Besides Programming',
 		host: 'https://besidesprogramming.com',
-		gaTrackerId: 'UA-88781129-1',
+		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming',
 		paths: {
 			uploads: '/wp-content/uploads'
