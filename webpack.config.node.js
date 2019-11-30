@@ -1,5 +1,4 @@
 var path = require( 'path' );
-var nodeExternals = require( 'webpack-node-externals' );
 
 // var ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 // var UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' );
@@ -17,8 +16,6 @@ var config = {
 	// devtool: 'source-map',
 	entry: './index.js',
 	target: 'node',
-	externals: [ nodeExternals() ],
-
 	output: {
 		path: BUILD_DIR,
 		filename: 'server.js'
