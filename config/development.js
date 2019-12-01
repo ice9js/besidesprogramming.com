@@ -25,7 +25,7 @@ const settings = {
 	photon: {
 		enabled: false,
 		host: 'https://i0.wp.com',
-		sizes: [ 380, 570, 768, 960, 1150, 1920, 2550 ]
+		sizes: [ 380, 570, 768, 960, 1150, 1920, 2550 ],
 	},
 	posts: {
 		perPage: 10,

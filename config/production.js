@@ -6,18 +6,25 @@ const settings = {
 	app: {
 		name: 'Besides Programming',
 		host: 'https://besidesprogramming.com',
+		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming',
+		twitterHandle: 'ice9js',
+		openGraphImage: 'https://besidesprogramming.com/img/open-graph-default-image.png',
+	},
+	api: {
+		host: 'https://besidesprogramming.com/wp-json',
+	},
+	assets: {
+		host: 'https://besidesprogramming.com',
 		paths: {
 			uploads: '/wp-content/uploads'
 		},
-	},
-	api: {
-		host: 'https://besidesprogramming.com/wp-json/wp/v2',
-	},
+	},	
 	photon: {
 		enabled: true,
-		host: 'https://i0.wp.com'
+		host: 'https://i0.wp.com',
+		sizes: [ 380, 570, 768, 960, 1150, 1920, 2550 ],
 	},
 	posts: {
 		perPage: 10,
