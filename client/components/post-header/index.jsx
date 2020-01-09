@@ -15,7 +15,11 @@ import { facebookShareUrl, pinterestShareUrl, twitterShareUrl } from 'lib/social
 const PostHeader = ( { date, image, link, slug, title } ) => (
 	<div className="post-header">
 		<h2 className="post-header__title">
-			<a className="post-header__link" href={ `/${ slug }` }>{ title }</a>
+			<a
+				className="post-header__link"
+				href={ `/${ slug }` }
+				dangerouslySetInnerHTML={ { __html: title } }
+			/>
 		</h2>
 
 		<div className="post-header__meta">
