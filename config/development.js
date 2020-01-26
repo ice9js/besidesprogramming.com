@@ -5,7 +5,7 @@ const settings = {
 	env: 'development',
 	app: {
 		name: 'The Missing Semicolon',
-		description: 'On programming and life by trial and error. By Kuba Birecki.',
+		description: 'A software engineer\'s journal. By Kuba Birecki.',
 		host: 'besidesprogramming.localhost',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
