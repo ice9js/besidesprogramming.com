@@ -32,16 +32,16 @@ const PostFooter = ( { image, link, next, previous, title } ) => (
 		</div>
 
 		<div className="post-footer__links">
-			{ previous && (
-				<a className="post-footer__link is-prev" href={ `/${ previous.slug }`}>
-					<span className="post-footer__link-label">{ 'previous' }</span>
-					<span className="post-footer__link-title">{ previous.title }</span>
-				</a>
-			) }
 			{ next && (
 				<a className="post-footer__link is-next" href={ `/${ next.slug }`}>
 					<span className="post-footer__link-label">{ 'next' }</span>
 					<span className="post-footer__link-title">{ next.title }</span>
+				</a>
+			) }
+			{ previous && (
+				<a className="post-footer__link is-prev" href={ `/${ previous.slug }`}>
+					<span className="post-footer__link-label">{ 'previous' }</span>
+					<span className="post-footer__link-title">{ previous.title }</span>
 				</a>
 			) }
 		</div>
