@@ -4,23 +4,24 @@
 const settings = {
 	env: 'production',
 	app: {
-		name: 'Besides Programming',
-		host: 'https://besidesprogramming.com',
+		name: 'The Missing Semicolon',
+		description: 'On programming and life by trial and error. By Kuba Birecki.',
+		host: 'https://themissingsemicolon.blog',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming',
 		twitterHandle: 'ice9js',
-		openGraphImage: 'https://besidesprogramming.com/img/open-graph-default-image.png',
+		openGraphImage: 'https://themissingsemicolon.blog/img/open-graph-default-image.png',
 	},
 	api: {
-		host: 'https://besidesprogramming.com/wp-json',
+		host: 'https://themissingsemicolon.blog/wp-json',
 	},
 	assets: {
-		host: 'https://besidesprogramming.com',
+		host: 'https://themissingsemicolon.blog',
 		paths: {
 			uploads: '/wp-content/uploads'
 		},
-	},	
+	},
 	photon: {
 		enabled: true,
 		host: 'https://i0.wp.com',
@@ -52,12 +53,12 @@ const settings = {
 		{
 			icon: 'rss',
 			title: 'RSS Feed',
-			url: 'https://besidesprogramming.com/feed/',
+			url: 'https://themissingsemicolon.blog/feed/',
 		},
 		{
 			icon: ['fab', 'slack-hash'],
 			title: 'Slack',
-			url: 'https://slackin.besidesprogramming.com/',
+			url: 'https://slackin.themissingsemicolon.blog/',
 		},
 		{
 			icon: ['fab', 'instagram'],
@@ -72,7 +73,7 @@ const settings = {
 		{
 			icon: ['fab', 'facebook-f'],
 			title: 'Facebook',
-			url: 'https://www.facebook.com/besidesprogramming/',
+			url: 'https://www.facebook.com/themissingsemicolon/',
 		},
 	],
 };

@@ -4,14 +4,14 @@
 const settings = {
 	env: 'development',
 	app: {
-		name: 'Besides Programming',
-		description: 'Code is the easy part. A blog about programming and more.',
+		name: 'The Missing Semicolon',
+		description: 'On programming and life by trial and error. By Kuba Birecki.',
 		host: 'besidesprogramming.localhost',
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming-dev',
 		twitterHandle: 'ice9js',
-		openGraphImage: 'https://besidesprogramming.com/img/open-graph-default-image.png',
+		openGraphImage: 'https://themissingsemicolon.blog/img/open-graph-default-image.png',
 	},
 	api: {
 		host: 'http://besidesprogramming-wp.local/wp-json',
@@ -53,7 +53,7 @@ const settings = {
 		{
 			icon: 'rss',
 			title: 'RSS Feed',
-			url: 'https://besidesprogramming.com/feed/',
+			url: 'https://themissingsemicolon.blog/feed/',
 		},
 		{
 			icon: ['fab', 'slack-hash'],
@@ -73,7 +73,7 @@ const settings = {
 		{
 			icon: ['fab', 'facebook-f'],
 			title: 'Facebook',
-			url: 'https://www.facebook.com/besidesprogramming/',
+			url: 'https://www.facebook.com/themissingsemicolon/',
 		},
 	],
 };
