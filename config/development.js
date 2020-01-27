@@ -10,7 +10,7 @@ const settings = {
 		port: 3000,
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming-dev',
-		twitterHandle: 'ice9js',
+		twitterHandle: '@ice9js',
 		openGraphImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
 	},
 	api: {

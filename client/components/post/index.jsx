@@ -44,6 +44,7 @@ const Post = ( { error, loading, post } ) => {
 				<meta property="article:modified_time" content={ post.modified } />
 				<meta property="article:author" content={ post.author } />
 
+				<meta property="twitter:card" content="summary_large_image" />
 				<meta property="twitter:site" content={ config( 'app.twitterHandle' ) } />
 				<meta property="twitter:creator" content={ config( 'app.twitterHandle' ) } />
 			</Helmet>
