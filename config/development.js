@@ -11,7 +11,7 @@ const settings = {
 		gtmId: 'GTM-KN4FS4P',
 		disqusShortname: 'besidesprogramming-dev',
 		twitterHandle: 'ice9js',
-		openGraphImage: 'https://themissingsemicolon.blog/img/open-graph-default-image.png',
+		openGraphImage: 'https://themissingsemicolon.blog/andromeda/img/open-graph-default-image.png',
 	},
 	api: {
 		host: 'http://besidesprogramming-wp.local/wp-json',
